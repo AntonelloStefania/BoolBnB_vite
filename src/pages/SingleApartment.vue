@@ -35,9 +35,6 @@ export default {
         <AppLoading v-if="this.store.loading" />
         <div class="container" v-else>
             <div class="row my-3">
-                <div class="card-image-container d-flex justify-content-center w-100">
-                    <img :src="`${this.store.baseUrl}/storage/${apartment.cover}`" class="card-img-top my-img" :alt="'Immagine non disponibile'">
-                </div>
                 <div class="col-12 text-center mb-4">
                     <h1> {{ apartment.title }}</h1>
                 </div>
@@ -46,9 +43,6 @@ export default {
                 </div>
                 <div class="col-12 my-3">
                     <strong>Prezzo:</strong>{{ apartment.price }}
-                </div>
-                <div class="col-12">
-                    <strong>Descrizione:</strong>{{ apartment.description }}
                 </div>
                 <div class="col-12 my-3">
                     <strong>N_rooms</strong>{{ apartment.n_rooms }}

@@ -13,10 +13,6 @@ export default {
                     routeName: 'apartments'
                 },
                 {
-                    label: 'Types',
-                    routeName: 'types'
-                },
-                {
                     label: 'Contact Us',
                     routeName: 'contact-us'
                 },

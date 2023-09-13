@@ -2,10 +2,10 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import HomePage from './pages/HomePage.vue';
 import ApartmentList from './pages/ApartmentList.vue';
-import TypeList from './pages/TypeList.vue';
 import SingleApartment from './pages/SingleApartment.vue';
-
 import ContactUs from './pages/ContactUs.vue';
+import NotFound from './pages/NotFound.vue';
+
 
 const router = createRouter({
     history: createWebHistory(),
@@ -26,14 +26,18 @@ const router = createRouter({
             component: SingleApartment
         },
         {
-            path: '/types',
-            name: 'types',
-            component: TypeList
-        },
-        {
             path: '/contact-us',
             name: 'contact-us',
             component: ContactUs
+        },
+        {
+            path: '/pagina-non-trovata',
+            name: 'not-found',
+            component: NotFound
+        },
+        {
+            path: '/:catchAll(.*)',
+            redirect: '/pagina-non-trovata'
         }
     ]
 });
