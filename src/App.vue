@@ -1,15 +1,16 @@
 <script>
-import Apartment from './components/Apartment.vue';
+import Header from './components/Header.vue';
 
 export default {
   components: {
-    Apartment
+    Header
   }
 }
 </script>
 
 <template>
-  <Apartment />
+  <Header />
+  <router-view></router-view>
 </template>
 
 <style lang="scss">
