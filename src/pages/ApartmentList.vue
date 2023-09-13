@@ -36,11 +36,17 @@ export default {
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center text-primary mb-5">Bnp - APARTMENTS</h1>
+                <h1 class="text-center text-primary mb-5">BnB - APARTMENTS</h1>
             </div>
         </div>
     </div>
     <div class="container mt-5">
+      <div class="row justify-content-start my-5">
+        <div >
+
+          <a href="http://127.0.0.1:8000" class="btn btn-primary">LARAVEL</a>
+        </div>
+      </div>
       <div class="row">
         <div class="col-12 col-md-4" v-for="apartment in apartments" :key="apartment.id">
             <Card :apartment="apartment" />

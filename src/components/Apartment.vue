@@ -37,7 +37,7 @@ export default {
         </div>
     </div>
     <div class="container">
-      <a href="http://127.0.0.1:8000/admin/apartments" class="btn btn-primary">LARAVEL</a>
+     
       <div class="row">
         <div class="col-12 col-md-4" v-for="apartment in apartments" :key="apartment.id">
           <div class="card">
