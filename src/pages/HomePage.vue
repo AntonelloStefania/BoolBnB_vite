@@ -5,7 +5,6 @@ import Card from '../components/Card.vue'
 
 export default {
     name: 'HomePage',
-<<<<<<< HEAD
     components: {
         Card
     },
@@ -30,9 +29,6 @@ export default {
             })
         }
     }
-=======
-  
->>>>>>> 98ae1817bf6356dbab09f9a9cf5079f4cc265527
 }
 
 </script>
@@ -88,32 +84,32 @@ export default {
 </template>
 
 <style lang="scss">
-.jumbotron-container{
-    width:100vw;
-   .carousel-custom{
+.jumbotron-container {
     width: 100vw;
-    
-    .carousel-item{
-        .custom-description{
-            color: whitesmoke;
-            background-color: rgba(22, 22, 22, 0.555);
-            border-radius: 1rem;
+
+    .carousel-custom {
+        width: 100vw;
+
+        .carousel-item {
+            .custom-description {
+                color: whitesmoke;
+                background-color: rgba(22, 22, 22, 0.555);
+                border-radius: 1rem;
+            }
+
+            .carousel-img {
+                aspect-ratio: 16/9;
+                object-fit: cover;
+                width: 100%;
+                height: 600px;
+                object-position: bottom;
+
+
+
+
+            }
+
         }
-        
-        .carousel-img{
-            aspect-ratio: 16/9;
-            object-fit: cover;
-            width: 100%;
-            height: 600px;
-            object-position: bottom;
-           
-           
-            
-            
-        }
-        
     }
-   }
 }
-    
 </style>
