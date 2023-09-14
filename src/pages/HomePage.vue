@@ -1,7 +1,34 @@
 <script>
+import axios from 'axios';
+import { store } from '../store.js';
+import Card from '../components/Card.vue'
+
 export default {
     name: 'HomePage',
-  
+    components: {
+        Card
+    },
+    data() {
+        return {
+            store,
+            apartments: []
+        }
+    },
+    created() {
+        this.getApartments();
+    },
+    methods: {
+        getApartments() {
+            axios.get(`${this.store.baseUrl}/api/apartments`).then((response) => {
+                if (response.data.success) {
+                    this.apartments = response.data.results;
+                }
+                else {
+                    //
+                }
+            })
+        }
+    }
 }
 
 </script>
@@ -46,36 +73,43 @@ export default {
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="row">
+                <div class="col-12 col-md-4" v-for="apartment in apartments" :key="apartment.id">
+                    <Card :apartment="apartment" />
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <style lang="scss">
-.jumbotron-container{
-    width:100vw;
-   .carousel-custom{
+.jumbotron-container {
     width: 100vw;
-    
-    .carousel-item{
-        .custom-description{
-            color: whitesmoke;
-            background-color: rgba(22, 22, 22, 0.555);
-            border-radius: 1rem;
+
+    .carousel-custom {
+        width: 100vw;
+
+        .carousel-item {
+            .custom-description {
+                color: whitesmoke;
+                background-color: rgba(22, 22, 22, 0.555);
+                border-radius: 1rem;
+            }
+
+            .carousel-img {
+                aspect-ratio: 16/9;
+                object-fit: cover;
+                width: 100%;
+                height: 600px;
+                object-position: bottom;
+
+
+
+
+            }
+
         }
-        
-        .carousel-img{
-            aspect-ratio: 16/9;
-            object-fit: cover;
-            width: 100%;
-            height: 600px;
-            object-position: center;
-           
-           
-            
-            
-        }
-        
     }
-   }
 }
-    
 </style>
