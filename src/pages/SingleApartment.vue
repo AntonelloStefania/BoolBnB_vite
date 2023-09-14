@@ -32,12 +32,11 @@ export default {
 
 <template lang="">
     <div>
-        <AppLoading v-if="this.store.loading" />
-        <div class="container" v-else>
+        <div class="container">
             <div class="row my-3">
-                <div class="col-12 text-center mb-4">
+                <!-- <div class="col-12 text-center mb-4">
                     <h1> {{ apartment.title }}</h1>
-                </div>
+                </div> -->
                 <div class="col-12">
                     <strong>Indirizzo:</strong>{{ apartment.address }}
                 </div>
@@ -48,16 +47,10 @@ export default {
                     <strong>N_rooms</strong>{{ apartment.n_rooms }}
                 </div>
                 <div class="col-12 my-3">
-                    <strong>N_wc</strong>
-                    <div class="container">
-                        <span>{{ apartment.n_wc }}</span>
-                    </div>
+                    <strong>N_wc</strong> {{ apartment.n_wc }}
                 </div>
                 <div class="col-12 my-3">
-                    <strong>Mq:</strong>
-                    <div class="container">
-                        <span>{{ apartment.mq }}</span>
-                    </div>
+                    <strong>Mq:</strong> {{ apartment.mq }}
                 </div>
             </div>
         </div>

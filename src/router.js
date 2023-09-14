@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage.vue';
 import ApartmentList from './pages/ApartmentList.vue';
 import SingleApartment from './pages/SingleApartment.vue';
 import ContactUs from './pages/ContactUs.vue';
+import ThankYou from './pages/ThankYou.vue';
 import NotFound from './pages/NotFound.vue';
 
 
@@ -29,6 +30,11 @@ const router = createRouter({
             path: '/contact-us',
             name: 'contact-us',
             component: ContactUs
+        },
+        {
+            path: '/thank-you',
+            name: 'thank-you',
+            component: ThankYou
         },
         {
             path: '/pagina-non-trovata',
