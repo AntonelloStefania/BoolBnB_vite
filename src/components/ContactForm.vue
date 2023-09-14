@@ -23,7 +23,7 @@ export default {
     },
     methods: {
         sendForm() {
-            this.loading = true
+            this.loading = true;
 
             const data = {
                 name: this.name,
