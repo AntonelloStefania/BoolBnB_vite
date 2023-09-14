@@ -42,10 +42,7 @@ export default {
     </div>
     <div class="container mt-5">
       <div class="row justify-content-start my-5">
-        <div >
-
-          <a href="http://127.0.0.1:8000" class="btn btn-primary">LARAVEL</a>
-        </div>
+        
       </div>
       <div class="row">
         <div class="col-12 col-md-4" v-for="apartment in apartments" :key="apartment.id">
