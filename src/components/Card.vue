@@ -47,14 +47,15 @@ export default {
       <div class="card shadow-sm border-0 rounded ">
         <div class="card-body card-h p-0"><img :src="`${store.baseUrl}/storage/${apartment.cover}`" alt="" class="w-100 card-img-top">
           <div class="p-4">
-            <h4 class="mb-2">{{apartment.title}}</h4>
-            <p class="small text-muted"><img :src="apartment.type.icons" alt="" class="apartment-icons me-3">{{apartment.type.name}}</p>
-            <ul class="social mb-0 list-inline mt-3">
-              <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
-              <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
-              <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-instagram"></i></a></li>
-              <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
+            <h4 class="mb-2 title">{{apartment.title}}</h4>
+            <div class="col-12 d-flex justify-content-between align-items-center text-container">
+              <div class="col-6">
+                <span><img :src="apartment.type.icons" alt="" class="apartment-icons me-3">{{apartment.type.name}}</span>
+              </div>
+              <div class="col-6 text-end">
+                <span>Prezzo per notte: </span><span class="fw-bold">{{apartment.price}}€</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -65,9 +66,21 @@ export default {
 
 <style lang="scss">
   .card-h{
-    
+    height: 570px;
+    .title{
+      height: 58px;
+    }
+
+    img{
+      height: 400px;
+      object-fit: cover;
+    }
+    .text-container{
+      height: 2rem;
+    }
     .apartment-icons{
-      width: 25px;
+     width: 2rem;
+     height: 2rem;
     }
   }
 </style>
