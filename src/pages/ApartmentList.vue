@@ -44,7 +44,7 @@ export default {
       <div class="row justify-content-start my-5">
         
       </div>
-      <div class="row">
+      <div class="row cards-row">
         <div class="col-12 col-md-4" v-for="apartment in apartments" :key="apartment.id">
             <Card :apartment="apartment" />
         </div>
@@ -52,6 +52,6 @@ export default {
     </div>
 </template>
 
-<style lang="">
-  
+<style lang="scss">
+ 
 </style>

@@ -78,14 +78,15 @@ export default {
             </div>
         </div>
     </div>
-   
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-4 my-5" v-for="apartment in apartments" :key="apartment.id">
-                <Card :apartment="apartment" />
-            </div>
-        </div>
-    </div>
+   <div class="container-fluid card-container">
+       <div class="container">
+           <div class="row">
+               <div class="col-12 col-md-6 col-lg-4 my-5" v-for="apartment in apartments" :key="apartment.id">
+                   <Card :apartment="apartment" />
+               </div>
+           </div>
+       </div>
+   </div>
 </template>
 
 <style lang="scss">
@@ -116,5 +117,10 @@ export default {
 
         }
     }
+}
+
+.card-container{
+    background-color: #fffaed;
+    margin:5rem 0;
 }
 </style>
