@@ -1,19 +1,21 @@
 <script>
 import axios from 'axios';
 import { store } from '../store.js';
-import AppLoader from './AppLoader.vue';
+import AppLoader from '../components/AppLoader.vue';
+import ThankYou from '../pages/ThankYou.vue';
 
 export default {
     name: "ContactForm",
     components: {
-        AppLoader
+        AppLoader,
+        ThankYou
     },
     data() {
         return {
             store,
             name: '',
             email: '',
-            message: '',
+            content: '',
             success: false,
             errors: {},
             loading: false
@@ -26,7 +28,7 @@ export default {
             const data = {
                 name: this.name,
                 email: this.email,
-                content: this.message
+                content: this.content
             }
 
             //PULISCO L'ARRAY DEGLI ERRORI
@@ -34,6 +36,7 @@ export default {
 
             axios.post(`${this.store.baseUrl}/api/contacts`, data).then((response) => {
                 this.success = response.data.success;
+                console.log(response.data)
                 if (!this.success) {
                     this.errors = response.data.errors;
                 }
@@ -41,11 +44,12 @@ export default {
                     //PULISCO I DATI IN INPUT
                     this.name = '';
                     this.email = '';
-                    this.message = '';
+                    this.content = '';
+
+                    this.loading = false
 
                     this.$router.push({ name: 'thank-you' })
                 }
-                this.loading = false
             });
         },
     }
@@ -74,8 +78,8 @@ export default {
                             </p>
                         </div>
                         <div class="col-12 col-md-6 my-3">
-                            <label class="control-label" for="name">Messaggio</label>
-                            <textarea name="message" id="message" v-model="message" placeholder="Messagio"
+                            <label class="control-label" for="name">Contenuto</label>
+                            <textarea name="content" id="content" v-model="content" placeholder="Contenuto"
                                 class="form-control" :class="errors.content ? 'is-invalid' : ''"></textarea>
                             <p v-for="(error, index) in errors.content" :key="index" class="text-danger">
                                 {{ error }}

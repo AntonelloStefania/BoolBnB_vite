@@ -17,12 +17,12 @@ const router = createRouter({
             component: HomePage
         },
         {
-            path: '/apartments',
+            path: '/blog',
             name: 'apartments',
             component: ApartmentList
         },
         {
-            path: '/single-apartment/:slug',
+            path: '/blog/:slug',
             name: 'single-apartment',
             component: SingleApartment
         },
