@@ -15,7 +15,7 @@ export default {
 </script>
 
 <template lang="">
-        <div class="card">
+        <!-- <div class="card">
               <div class="card-header text-center">
                 {{ apartment.title }}
               </div>
@@ -40,9 +40,34 @@ export default {
                     l'appartamento</router-link>
                 </div>
             </div>
+          </div> -->
+
+   
+      <!-- Card-->
+      <div class="card shadow-sm border-0 rounded ">
+        <div class="card-body card-h p-0"><img :src="`${store.baseUrl}/storage/${apartment.cover}`" alt="" class="w-100 card-img-top">
+          <div class="p-4">
+            <h4 class="mb-2">{{apartment.title}}</h4>
+            <p class="small text-muted"><img :src="apartment.type.icons" alt="" class="apartment-icons me-3">{{apartment.type.name}}</p>
+            <ul class="social mb-0 list-inline mt-3">
+              <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
+              <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
+              <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-instagram"></i></a></li>
+              <li class="list-inline-item m-0"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
           </div>
+        </div>
+      </div>
+
+     
+   
 </template>
 
-<style lang="">
+<style lang="scss">
+  .card-h{
     
+    .apartment-icons{
+      width: 25px;
+    }
+  }
 </style>
