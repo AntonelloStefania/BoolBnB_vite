@@ -46,10 +46,11 @@ export default {
                     this.email = '';
                     this.content = '';
 
-                    this.loading = false
 
                     this.$router.push({ name: 'thank-you' })
                 }
+
+                this.loading = false
             });
         },
     }
