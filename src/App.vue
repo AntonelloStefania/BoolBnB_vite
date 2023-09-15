@@ -11,7 +11,6 @@ export default {
 
 <template>
   <Header />
-  <Map />
   <router-view></router-view>
 </template>
 

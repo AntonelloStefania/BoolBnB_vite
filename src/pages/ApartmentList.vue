@@ -2,11 +2,13 @@
 import axios from 'axios';
 import { store } from '../store.js';
 import Card from '../components/Card.vue';
+import Map from '../components/Map.vue';
 
 export default {
   name: 'ApartmentList',
   components: {
-    Card
+    Card,
+    Map,
   },
   data() {
     return {
@@ -50,6 +52,7 @@ export default {
         </div>
       </div>
     </div>
+    
 </template>
 
 <style lang="scss">

@@ -11,8 +11,8 @@ export default {
      container: 'map'
     });
 
-    this.map.setCenter([45.55002 , 8.93635]); // Sostituisci con le coordinate desiderate
-        //this.map.setZoom(zoomLevel);
+    this.map.setCenter([4.89056 , 12.49427]); // Sostituisci con le coordinate desiderate
+    this.map.setZoom(5);
     },
     
 }

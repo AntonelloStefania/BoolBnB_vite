@@ -75,7 +75,7 @@ export default {
                             <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next" >
                             </button>
                         </div>
-                        <Map />
+                        
                     </div>
                 </div>
             </div>
@@ -92,6 +92,15 @@ export default {
            </div>
        </div>
    </div>
+   <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <Map/>
+        </div>
+
+      </div>
+
+    </div>
 </template>
 
 <style lang="scss">
