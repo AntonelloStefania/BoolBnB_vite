@@ -82,7 +82,9 @@ export default {
        <div class="container">
            <div class="row">
                <div class="col-12 col-md-6 col-lg-4 my-5" v-for="apartment in apartments" :key="apartment.id">
-                   <Card :apartment="apartment" />
+                <router-link class="text-decoration-none" :to=" { name: 'single-apartment', params: { slug: apartment.slug }}">
+                    <Card :apartment="apartment" />
+                </router-link>
                </div>
            </div>
        </div>
