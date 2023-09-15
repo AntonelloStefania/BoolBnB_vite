@@ -33,23 +33,26 @@ export default {
 </template>
 
 <style lang="scss">
-  .card-h{
-    height: 570px;
-    .title{
-      height: 58px;
-      overflow: hidden;
-    }
+.card-h {
+  height: 570px;
 
-    img{
-      height: 400px;
-      object-fit: cover;
-    }
-    .text-container{
-      height: 2rem;
-    }
-    .apartment-icons{
-     width: 2rem;
-     height: 2rem;
-    }
+  .title {
+    height: 58px;
+    overflow: hidden;
   }
+
+  img {
+    height: 400px;
+    object-fit: cover;
+  }
+
+  .text-container {
+    height: 2rem;
+  }
+
+  .apartment-icons {
+    width: 2rem;
+    height: 2rem;
+  }
+}
 </style>
