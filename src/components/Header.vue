@@ -49,7 +49,7 @@ export default {
                             <a href="http://127.0.0.1:8000" class="host-btn" >Diventa Host</a>
                         </div>
                         <div class="d-none d-lg-inline">
-                           <span>oppure effettua il</span> <a href="http://127.0.0.1:8000/admin/apartments" class="login-btn">Login</a>
+                           <span>oppure effettua il</span> <a href="http://127.0.0.1:8000/login" class="login-btn">Login</a>
                         </div>
                     </div>
             </div>
