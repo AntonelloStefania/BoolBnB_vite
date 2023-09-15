@@ -1,8 +1,5 @@
 <script>
-// const map = tt.map({
-//     key: '<NvRVuGxMpACPuu2WUR93HOEvbVfg2g9A>',
-//     container: 'map'
-// });
+
 export default {
 
 

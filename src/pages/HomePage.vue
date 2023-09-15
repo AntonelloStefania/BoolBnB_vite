@@ -2,11 +2,13 @@
 import axios from 'axios';
 import { store } from '../store.js';
 import Card from '../components/Card.vue'
+import Map from '../components/Map.vue';
 
 export default {
     name: 'HomePage',
     components: {
-        Card
+        Card,
+        Map
     },
     data() {
         return {
@@ -73,6 +75,7 @@ export default {
                             <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next" >
                             </button>
                         </div>
+                        <Map />
                     </div>
                 </div>
             </div>
@@ -93,10 +96,10 @@ export default {
 
 <style lang="scss">
 .jumbotron-container {
-   
+
 
     .carousel-custom {
-        
+
 
         .carousel-item {
             .custom-description {
@@ -104,14 +107,14 @@ export default {
                 background-color: rgba(22, 22, 22, 0.555);
                 border-radius: 1rem;
 
-                p{
-                    font-size:18px;
+                p {
+                    font-size: 18px;
                     padding: 0 0.75rem;
                 }
             }
 
             .carousel-img {
-                
+
                 object-fit: cover;
                 width: 100%;
                 height: 600px;
@@ -126,8 +129,8 @@ export default {
     }
 }
 
-.card-container{
+.card-container {
     background-color: #f7ecd1;
-    margin:5rem 0;
+    margin: 5rem 0;
 }
 </style>
