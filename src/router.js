@@ -6,6 +6,7 @@ import SingleApartment from './pages/SingleApartment.vue';
 import ContactUs from './pages/ContactUs.vue';
 // import ThankYou from './pages/ThankYou.vue';
 import NotFound from './pages/NotFound.vue';
+import Map from './components/Map.vue';
 
 
 const router = createRouter({
@@ -30,6 +31,11 @@ const router = createRouter({
             path: '/contact-us',
             name: 'contact-us',
             component: ContactUs
+        },
+        {
+            path: '/coordinate-apartments',
+            name: 'coordinate-apartments',
+            component: Map,
         },
         // {
         //     path: '/thank-you',
