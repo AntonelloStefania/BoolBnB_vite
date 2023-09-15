@@ -1,10 +1,10 @@
 <script>
 import Header from './components/Header.vue';
-import Map from './components/Map.vue';
+
 export default {
   components: {
     Header,
-    Map
+    
   }
 }
 </script>

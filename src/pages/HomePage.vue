@@ -2,13 +2,13 @@
 import axios from 'axios';
 import { store } from '../store.js';
 import Card from '../components/Card.vue'
-import Map from '../components/Map.vue';
+import AppMap from '../components/AppMap.vue';
 
 export default {
     name: 'HomePage',
     components: {
         Card,
-        Map
+        AppMap,
     },
     data() {
         return {
@@ -95,7 +95,7 @@ export default {
    <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <Map/>
+          <AppMap/>
         </div>
 
       </div>
