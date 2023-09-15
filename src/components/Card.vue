@@ -18,7 +18,7 @@ export default {
         <div class="card shadow-sm border-0 rounded ">
           <div class="card-body card-h p-0"><img :src="`${store.baseUrl}/storage/${apartment.cover}`" alt="" class="w-100 card-img-top">
             <div class="p-4">
-              <h4 class="mb-2 title">{{apartment.title}}</h4>
+              <h5 class="mb-2 title">{{apartment.title}}</h5>
               <div class="col-12 d-md-flex justify-content-between align-items-center text-container">
                 <div class="col-12 col-md-6">
                   <span><img :src="apartment.type.icons" alt="" class="apartment-icons me-3"><span class="d-inline d-md-none d-lg-inline">{{apartment.type.name}}</span></span>

@@ -64,7 +64,7 @@ export default {
                             <img src="../assets/apartments/camper.webp" class="d-block  carousel-img " style="object-position:bottom;" alt="...">
                             <div class="carousel-caption d-none d-md-block custom-description">
                                 <h3>Soggiorni Straordinari con BoolBnB: Scopri Camper e Case Galleggianti Unici</h3>
-                                <p>Hai mai sognato di dormire su un'acqua serena o di svegliarti circondato dalla natura in un camper? Con BoolBnB, i tuoi sogni possono diventare realtà. Oltre agli alloggi tradizionali, offriamo una vasta gamma di esperienze uniche, tra cui soggiorni in case galleggianti e camper. Scopri una nuova dimensione del viaggio con BoolBnB e prenota il tuo prossimo soggiorno indimenticabile.</p>
+                                <p >Hai mai sognato di dormire su un'acqua serena o di svegliarti circondato dalla natura in un camper? Con BoolBnB, i tuoi sogni possono diventare realtà. Oltre agli alloggi tradizionali, offriamo una vasta gamma di esperienze uniche, tra cui soggiorni in case galleggianti e camper. Scopri una nuova dimensione del viaggio con BoolBnB e prenota il tuo prossimo soggiorno indimenticabile.</p>
                             </div>
                         </div>
                         <div class="">
@@ -101,6 +101,11 @@ export default {
                 color: whitesmoke;
                 background-color: rgba(22, 22, 22, 0.555);
                 border-radius: 1rem;
+
+                p{
+                    font-size:18px;
+                    padding: 0 0.75rem;
+                }
             }
 
             .carousel-img {
@@ -120,7 +125,7 @@ export default {
 }
 
 .card-container{
-    background-color: #fffaed;
+    background-color: #f7ecd1;
     margin:5rem 0;
 }
 </style>

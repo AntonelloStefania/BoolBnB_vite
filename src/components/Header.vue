@@ -23,11 +23,11 @@ export default {
 </script>
 
 <template lang="">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm mb-5">
+    <nav class="navbar navbar-expand-md pt-4 bg-white mb-5">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-                    <div class="logo_laravel">
-                       
+                    <div class="logo">
+                       <img src="../assets/logo_provvisorio.png" alt="">
                     </div>
                    
                 </a>
@@ -45,17 +45,42 @@ export default {
                     </ul>
                 </div>
                 <div class="d-flex">
-                        <div class="me-2">
-                            <a href="http://127.0.0.1:8000" >Diventa Host</a>
+                        <div class="me-4">
+                            <a href="http://127.0.0.1:8000" class="host-btn" >Diventa Host</a>
                         </div>
-                        <div>
-                            <a href="http://127.0.0.1:8000/admin/apartments" class="">Login</a>
+                        <div class="d-none d-lg-inline">
+                           <span>oppure effettua il</span> <a href="http://127.0.0.1:8000/admin/apartments" class="login-btn">Login</a>
                         </div>
                     </div>
             </div>
         </nav>
 </template>
 
-<style lang="">
-    
+<style lang="scss">
+    .logo{
+       img{
+        width:8rem;
+       }
+    }
+    .host-btn{
+        background-color: #718dd8;
+        text-decoration:none;
+        color: white;
+        border-radius: 5rem;
+        padding: 0.5rem;
+        font-weight: bold;
+    }
+    .host-btn:hover{
+        background-color: #5375d1;
+    }
+
+    .login-btn{
+        text-decoration:none;
+        color: rgb(110, 109, 109);
+        font-weight: bold;
+    }
+
+    .login-btn:hover{
+        color:rgb(29, 28, 28)
+    }
 </style>
