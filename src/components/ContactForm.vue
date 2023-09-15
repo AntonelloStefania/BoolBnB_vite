@@ -34,7 +34,7 @@ export default {
             //PULISCO L'ARRAY DEGLI ERRORI
             this.errors = {};
 
-            axios.post(`${this.store.baseUrl}/api/contacts`, data).then((response) => {
+            axios.post(`${this.store.baseUrl}/api/contact`, data).then((response) => {
                 this.success = response.data.success;
                 console.log(response.data)
                 if (!this.success) {
@@ -47,10 +47,10 @@ export default {
                     this.content = '';
 
 
-                    this.$router.push({ name: 'thank-you' })
+                    this.loading = false
+                    // this.$router.push({ name: 'thank-you' })
                 }
 
-                this.loading = false
             });
         },
     }
