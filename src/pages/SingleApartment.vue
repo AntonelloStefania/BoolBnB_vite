@@ -2,10 +2,13 @@
 
 import axios from 'axios';
 import { store } from '../store.js';
-
+import ContactForm from '../components/ContactForm.vue';
 
 export default {
     name: 'SingleApartment',
+    components: {
+        ContactForm
+    },
     data() {
         return {
             store,
@@ -22,7 +25,7 @@ export default {
                     this.apartment = response.data.apartment;
                 }
                 else {
-                    this.$router.push({ name: 'not-found' });
+
                 }
             })
         }
@@ -50,6 +53,13 @@ export default {
                     </ul>
                     <div class="card-body">
                         <router-link class="btn btn-sm btn-success" :to="{name: 'apartments'}">Tutti gli appartamenti</router-link>
+                    </div>
+                </div>
+                <div class="container mt-5">
+                    <div class="row">
+                        <div class="col-12">
+                            <ContactForm />
+                        </div>
                     </div>
                 </div>
             </div>

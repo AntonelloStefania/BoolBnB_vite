@@ -11,11 +11,7 @@ export default {
                 {
                     label: 'Apartments',
                     routeName: 'apartments'
-                },
-                {
-                    label: 'Contact Us',
-                    routeName: 'contact-us'
-                },
+                }
             ]
         }
     }
@@ -57,30 +53,32 @@ export default {
 </template>
 
 <style lang="scss">
-    .logo{
-       img{
-        width:8rem;
-       }
+.logo {
+    img {
+        width: 8rem;
     }
-    .host-btn{
-        background-color: #718dd8;
-        text-decoration:none;
-        color: white;
-        border-radius: 5rem;
-        padding: 0.5rem;
-        font-weight: bold;
-    }
-    .host-btn:hover{
-        background-color: #5375d1;
-    }
+}
 
-    .login-btn{
-        text-decoration:none;
-        color: rgb(110, 109, 109);
-        font-weight: bold;
-    }
+.host-btn {
+    background-color: #718dd8;
+    text-decoration: none;
+    color: white;
+    border-radius: 5rem;
+    padding: 0.5rem;
+    font-weight: bold;
+}
 
-    .login-btn:hover{
-        color:rgb(29, 28, 28)
-    }
+.host-btn:hover {
+    background-color: #5375d1;
+}
+
+.login-btn {
+    text-decoration: none;
+    color: rgb(110, 109, 109);
+    font-weight: bold;
+}
+
+.login-btn:hover {
+    color: rgb(29, 28, 28)
+}
 </style>

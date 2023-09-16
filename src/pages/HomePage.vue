@@ -75,7 +75,6 @@ export default {
                             <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next" >
                             </button>
                         </div>
-                        
                     </div>
                 </div>
             </div>
