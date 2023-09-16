@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import { store } from '../store';
+
 import AppLoader from './AppLoader.vue';
 
 export default {
@@ -30,10 +31,10 @@ export default {
             }
 
             this.errors = {};
-
-            axios.post(`${this.store.baseUrl}/api/contacts`, data).then((response) => {
+           
+           
+            axios.post(`${this.store.baseUrl}/api/contacts/apartments/${this.$route.params.slug}`, data).then((response) => {
                 this.success = response.data.success;
-
                 if (!this.success) {
                     this.errors = response.data.errors;
                 }
@@ -47,7 +48,9 @@ export default {
 
                 this.loading = false
             });
-        }
+        },
+
+   
     }
 }
 </script>

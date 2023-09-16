@@ -38,7 +38,7 @@ const router = createRouter({
         {
             path: '/:catchAll(.*)',
             redirect: '/pagina-non-trovata'
-        }
+        },
     ]
 });
 
