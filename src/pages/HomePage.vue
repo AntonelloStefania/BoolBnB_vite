@@ -39,7 +39,7 @@ export default {
     <div class="container-fluid jumbotron-container d-none d-md-block">
         <div class="row">
             <div class="col-12 p-0">
-                <div id="carouselExampleDark" class="carousel carousel-dark slide " data-bs-ride="true">
+                <div id="carouselExampleDark" class="carousel  slide " data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" disabled></button>
                         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2" disabled></button>
