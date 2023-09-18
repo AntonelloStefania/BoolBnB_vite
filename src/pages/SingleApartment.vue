@@ -179,7 +179,7 @@ export default {
                         <li class="list-group-item"><strong>Mq:</strong>{{ apartment.mq }}</li> 
                     </ul>
                     <div class="card-body">
-                        <router-link class="btn btn-sm btn-success" :to="{name: 'apartments'}">Tutti gli appartamenti</router-link>
+                        <router-link class="btn btn-sm btn-success" :to="{name: 'home'}">Tutti gli appartamenti</router-link>
                     </div>
                 </div>
                 <div class="container mt-5">
