@@ -38,7 +38,7 @@ export default {
 <template lang="">
     <div class="container-fluid jumbotron-container d-none d-md-block">
         <div class="row">
-            <div class="col-12 p-0">
+            <div class="col-12 p-0" disabled>
                 <div id="carouselExampleDark" class="carousel  slide " data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" disabled></button>
