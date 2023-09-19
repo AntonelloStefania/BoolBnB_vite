@@ -42,7 +42,7 @@ export default {
 
         sendForm(){
             this.loading=true;
-         const data = {
+            const data = {
              name:this.name,
              surname:this.surname,
              email:this.email,
