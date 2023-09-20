@@ -31,6 +31,9 @@ export default {
       axios.get(`${this.store.baseUrl}/api/apartments`).then((response) => {
         if (response.data.success) {
           this.apartments = response.data.results;
+          if(this.address != ''){
+            this.filteredApartments();
+          }
         }
         else {
           //
@@ -38,18 +41,12 @@ export default {
       })
     },
     filteredApartments(){
-      console.log('fin qui va')
-      // this.getApartments()
       // this.apartments = this.apartments.filter(apartment => apartment.n_wc > this.n_wc_min);
-      if(this.address != ''){
-        console.log('anche fin qui')
-        this.apartments = this.apartments.filter(apartment => apartment.lon > this.bbox[0]);
-        this.apartments = this.apartments.filter(apartment => apartment.lon < this.bbox[2]);
-        this.apartments = this.apartments.filter(apartment => apartment.lat > this.bbox[1]);
-        this.apartments = this.apartments.filter(apartment => apartment.lat < this.bbox[3]);
-      } else {
-        this.getApartments()
-      }
+      this.apartments = this.apartments.filter(apartment => apartment.lon > this.bbox[0]);
+      this.apartments = this.apartments.filter(apartment => apartment.lon < this.bbox[2]);
+      this.apartments = this.apartments.filter(apartment => apartment.lat > this.bbox[1]);
+      this.apartments = this.apartments.filter(apartment => apartment.lat < this.bbox[3]);
+      this.address = '';
     },
     getSuggetions(){
       let options = {
@@ -104,8 +101,6 @@ export default {
         this.suggestionLon + (this.distance / (111.32 * Math.cos(this.suggestionLat * (Math.PI / 180)))), // Longitudine massima
         this.suggestionLat + (this.distance / 111.32), // Latitudine massima
       ];
-      console.log(this.bbox)
-      console.log(this.bbox[0])
     }
   }
 }
@@ -124,7 +119,7 @@ export default {
                 <option v-for="suggestion in suggestions" :value="suggestion.address.freeformAddress">{{suggestion.address.freeformAddress}}</option>
               </datalist>
               <input type="number" v-model="n_wc_min">
-              <button @click="filteredApartments()">
+              <button @click="getApartments()">
                 avvia ricerca
               </button>
             </div>
