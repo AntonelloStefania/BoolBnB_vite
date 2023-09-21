@@ -89,94 +89,94 @@ export default {
                             this.loading = false
 
                         })
+                });
+
+            //SECONDA PROVA FUNZIONAAAAAAAAAAA
+            // const urlMessage = `http://127.0.0.1:8000/api/messages`;
+
+            // // Crea un oggetto FormData per i dati del modulo
+            //  const formData = new FormData();
+            //  formData.append('name', document.getElementById('name').value);
+            //  formData.append('surname', document.getElementById('surname').value);
+            //  formData.append('email', document.getElementById('email').value);
+            //  formData.append('message', document.getElementById('message').value);
+            //  formData.append('apartment_id', this.apartment_id)
+
+            //  // Crea una richiesta XMLHttpRequest
+            //  const xhr = new XMLHttpRequest();
+            //  xhr.open('POST', urlMessage, true);
+
+            //  // Imposta il gestore dell'evento per la risposta
+            //  xhr.onload = function () {
+            //      if (xhr.status === 200) {
+            //          // Risposta dal server
+            //          const response = JSON.parse(xhr.responseText);
+            //          console.log(response);
+
+            //          this.success = response.success;
+
+            //          if (this.success === true) {
+            // //             // Form inviato con successo, reimposta i campi e gestisci la conferma
+
+            //             document.getElementById('name').value = '';
+            //             document.getElementById('surname').value = '';
+            //             document.getElementById('email').value = '';
+            //             document.getElementById('message').value = '';
 
 
-                    //SECONDA PROVA FUNZIONAAAAAAAAAAA
-                    // const urlMessage = `http://127.0.0.1:8000/api/messages`;
+            //          } else {
+            //              // Gestisci gli errori
+            //              this.errors = response.errors;
+            //          }
+            //      } else {
+            //          console.error('Errore nella richiesta:', xhr.status);
+            //      }
+            //  };
 
-                    // // Crea un oggetto FormData per i dati del modulo
-                    //  const formData = new FormData();
-                    //  formData.append('name', document.getElementById('name').value);
-                    //  formData.append('surname', document.getElementById('surname').value);
-                    //  formData.append('email', document.getElementById('email').value);
-                    //  formData.append('message', document.getElementById('message').value);
-                    //  formData.append('apartment_id', this.apartment_id)
-
-                    //  // Crea una richiesta XMLHttpRequest
-                    //  const xhr = new XMLHttpRequest();
-                    //  xhr.open('POST', urlMessage, true);
-
-                    //  // Imposta il gestore dell'evento per la risposta
-                    //  xhr.onload = function () {
-                    //      if (xhr.status === 200) {
-                    //          // Risposta dal server
-                    //          const response = JSON.parse(xhr.responseText);
-                    //          console.log(response);
-
-                    //          this.success = response.success;
-
-                    //          if (this.success === true) {
-                    // //             // Form inviato con successo, reimposta i campi e gestisci la conferma
-
-                    //             document.getElementById('name').value = '';
-                    //             document.getElementById('surname').value = '';
-                    //             document.getElementById('email').value = '';
-                    //             document.getElementById('message').value = '';
+            // // // Invia la richiesta con i dati del modulo
+            //  xhr.send(formData);
 
 
-                    //          } else {
-                    //              // Gestisci gli errori
-                    //              this.errors = response.errors;
-                    //          }
-                    //      } else {
-                    //          console.error('Errore nella richiesta:', xhr.status);
-                    //      }
-                    //  };
+            //TERZA PROVA
 
-                    // // // Invia la richiesta con i dati del modulo
-                    //  xhr.send(formData);
+            // Crea un oggetto FormData con i dati del form
+            // let data = new FormData();
+            // data.append("name", this.name);
+            // data.append("surname",this.surname);
+            // data.append("apartment_id", this.apartment_id)
+            // data.append("email", this.email);
+            // data.append("message", this.message);
 
+            // // Crea le opzioni della richiesta
+            // let options = {
+            //   method: "POST",
+            //   body: data,
+            // };
+            // console.log(options)
+            // // Invia la richiesta con la Fetch API
+            // fetch("http://127.0.0.1:8000/api/messages", options)
+            //   .then((response) => response.json())
+            //   .then((data) => {
+            //     // Gestisci la risposta del server
+            //     this.success = data.success;
+            //     if (!this.success) {
+            //       this.errors = data.errors;
+            //     } else {
+            //       this.name = "";
+            //       this.email = "";
+            //       this.message = "";
+            //       this.surname="";
 
-                    //TERZA PROVA
+            //     }
 
-                    // Crea un oggetto FormData con i dati del form
-                    // let data = new FormData();
-                    // data.append("name", this.name);
-                    // data.append("surname",this.surname);
-                    // data.append("apartment_id", this.apartment_id)
-                    // data.append("email", this.email);
-                    // data.append("message", this.message);
-
-                    // // Crea le opzioni della richiesta
-                    // let options = {
-                    //   method: "POST",
-                    //   body: data,
-                    // };
-                    // console.log(options)
-                    // // Invia la richiesta con la Fetch API
-                    // fetch("http://127.0.0.1:8000/api/messages", options)
-                    //   .then((response) => response.json())
-                    //   .then((data) => {
-                    //     // Gestisci la risposta del server
-                    //     this.success = data.success;
-                    //     if (!this.success) {
-                    //       this.errors = data.errors;
-                    //     } else {
-                    //       this.name = "";
-                    //       this.email = "";
-                    //       this.message = "";
-                    //       this.surname="";
-
-                    //     }
-
-                    //     this.loading = false;
-                    //   });
+            //     this.loading = false;
+            //   });
 
 
-                }
+        }
 
     }
-    }
+}
 </script>
 
 <template lang="">
