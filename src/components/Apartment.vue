@@ -17,6 +17,7 @@ export default {
       axios.get(`${this.baseUrl}/api/apartments`).then((response) => {
         if (response.data.success) {
           this.apartments = response.data.results;
+          console.log(apartment)
         }
         else {
           //

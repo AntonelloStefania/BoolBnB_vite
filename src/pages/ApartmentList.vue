@@ -57,7 +57,7 @@ export default {
         body: null // non serve un corpo per una richiesta GET
       };
 
-      fetch("https://api.tomtom.com/search/2/search/" + this.address + ".json?key=" + 'NvRVuGxMpACPuu2WUR93HOEvbVfg2g9A' + "&typeahead=true&limit=10", options)
+      fetch("https://api.tomtom.com/search/2/search/" + this.address + ".json?key=" + 'NvRVuGxMpACPuu2WUR93HOEvbVfg2g9A' + "&typeahead=true&limit=10&countrySet=IT", options)
       .then(response => {
         // controllare se la risposta è valida
         if (response.ok) {
@@ -81,8 +81,24 @@ export default {
         }
       })
       .then((data) => {
-        if(this.address === data.results[0].address.freeformAddress){
-          this.getPosition(data.results[0])
+        const inputAddress = this.address.toLowerCase(); // Converto l'indirizzo di input in minuscolo
+        const results = data.results;
+
+        // Filtra i risultati in base a una corrispondenza parziale
+        const filteredResults = results.filter((result) => {
+          const resultAddress = result.address.freeformAddress.toLowerCase(); // Converto l'indirizzo del risultato in minuscolo
+          return resultAddress.includes(inputAddress); // Verifica se l'indirizzo del risultato include l'indirizzo di input
+        });
+
+        if (filteredResults.length > 0) {
+          this.suggestions = filteredResults;
+          // Restituisci il risultato più simile tra quelli filtrati
+          const mostSimilarResult = filteredResults[0];
+          this.getPosition(mostSimilarResult);
+        }
+        // Altrimenti, svuota la lista dei suggerimenti e nascondi i dettagli dell'indirizzo
+        else {
+          this.suggestions = "";
         }
       })
       .catch(error => {
@@ -118,7 +134,7 @@ export default {
               <datalist id="suggestions">
                 <option v-for="suggestion in suggestions" :value="suggestion.address.freeformAddress">{{suggestion.address.freeformAddress}}</option>
               </datalist>
-              <input type="number" v-model="n_wc_min">
+              <!-- <input type="number" v-model="n_wc_min"> -->
               <button @click="getApartments()">
                 avvia ricerca
               </button>

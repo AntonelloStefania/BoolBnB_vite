@@ -1,4 +1,72 @@
 @import '../../node_modules/bootstrap/';
 @import '../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 @import "@tomtom-international/web-sdk-maps";
-@import '../../node_modules/@tomtom-international/web-sdk-maps/dist/maps.css'
+@import '../../node_modules/@tomtom-international/web-sdk-maps/dist/maps.css';
+
+.change-cursor {
+    cursor: pointer;
+}
+
+//pulsante BLU
+.blue-btn {
+    background-color: #718dd8;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.blue-btn:hover {
+    background-color: #5375d1;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+
+}
+
+//pulsante BEIGE
+.beige-btn {
+    background-color: #ffd465;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 2rem;
+    color: rgb(68, 68, 68);
+    font-weight: bold;
+}
+
+.beige-btn:hover {
+    background-color: #f7e4b4;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 2rem;
+    color: rgb(68, 68, 68);
+    font-weight: bold;
+}
+
+//background beige
+
+.bg-beige {
+    background-color: #f7ecd1;
+
+}
+
+//background-blue
+
+.bg-blue {
+    background-color: #718dd8;
+    color: whitesmoke;
+}
+
+//TESTO SCURO
+.home-text {
+    color: rgb(68, 68, 68);
+}
+
+//BRAND NAME
+.brand {
+    color: #718dd8;
+    font-weight: bold;
+}
