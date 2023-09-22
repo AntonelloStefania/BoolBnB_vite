@@ -34,6 +34,7 @@ export default {
       axios.get(`${this.store.baseUrl}/api/apartments`).then((response) => {
         if (response.data.success) {
           this.apartments = response.data.results;
+          this.message= '';
           if (this.address != '') {
             this.filteredApartments();
           }

@@ -10,7 +10,10 @@ export default {
     return {
       store
     }
-  }
+  },
+  mounted() {
+    console.log(this.apartment);
+  },
 }
 </script>
 
