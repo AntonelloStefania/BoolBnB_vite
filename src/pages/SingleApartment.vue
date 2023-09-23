@@ -183,6 +183,17 @@ export default {
 </script>
 
 <template lang="">
+    <div class="container-fluid navbar-container">
+        <div class="row justify-content-between w-100">
+            <div class="col-2 py-3 d-flex justify-content-end">
+                <router-link :to="{name: 'home'}"  class="fw-bold" style="text-decoration:none; color:#3a537e;"><i class="fa-regular fa-circle-left" style="color: #3a537e;"></i> Annunci in Evidenza </router-link>
+            </div>
+            <div class="col-2 py-3 ">
+
+                <a href="#bottom" style="text-decoration:none; color:#3a537e;" class="fw-bold"> Contatta l'Host <i class="fa-regular fa-circle-down"  style=" color:#3a537e;"></i></a>
+            </div>
+        </div>
+    </div>
      
         <div class="container-fluid">
             <div class="row ">
@@ -286,7 +297,7 @@ export default {
                                 {{ error }}
                             </div> 
                         </div>
-                        <div class="surname">
+                        <div class="surname" id="bottom">
                             <label for="" class="form-label">Cognome*</label>
                             <input type="text" name="surname" id="surname" class="form-control custom-form px-2" placeholder=""
                                 aria-describedby="helpId" required v-model="surname">

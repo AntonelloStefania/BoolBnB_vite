@@ -42,7 +42,7 @@ export default {
                 </div>
                 <div class="d-flex">
                         <div class="me-4">
-                            <a href="http://127.0.0.1:8000" class="host-btn" >Diventa Host</a>
+                            <a href="http://127.0.0.1:8000" class="pink-btn" >Zona Host</a>
                         </div>
                         <div class="d-none d-lg-inline">
                            <span>oppure effettua il</span> <a href="http://127.0.0.1:8000/login" class="login-btn">Login</a>

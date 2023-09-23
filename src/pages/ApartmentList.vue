@@ -161,6 +161,13 @@ export default {
 </script>
 
 <template lang="">
+  <div class="container-fluid navbar-container">
+        <div class="row  w-100">
+            <div class="col-4 col-lg-2 py-3 d-flex justify-content-end">
+                <router-link :to="{name: 'home'}"  class="fw-bold" style="text-decoration:none; color:#3a537e;"><i class="fa-regular fa-circle-left" style="color: #3a537e;"></i> Annunci in Evidenza  </router-link>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-12">

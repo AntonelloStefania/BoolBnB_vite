@@ -77,5 +77,30 @@
 //NAVBAR
 
 .navbar-container {
-    background-color: #abbbe9;
+    background-color: #abbbe9b0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    a {
+        color: white;
+    }
+}
+
+.pink-btn {
+    background-color: #faccd4;
+    color: rgb(65, 65, 65);
+    padding: 0.5rem;
+    border-radius: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.pink-btn:hover {
+    background-color: #f895a5;
+    color: rgb(65, 65, 65)hite;
+    padding: 0.5rem;
+    border-radius: 2rem;
+    font-weight: bold;
+    text-decoration: none;
 }
