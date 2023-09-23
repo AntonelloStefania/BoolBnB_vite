@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     getApartments() {
-      axios.get(`${this.store.baseUrl}/api/apartments`).then((response) => {
+      axios.get(`${this.store.baseUrl}/api/all-apartments`).then((response) => {
         if (response.data.success) {
           this.apartments = response.data.results;
           this.message= '';
@@ -55,7 +55,7 @@ export default {
         min_lon: this.bbox[0],
         max_lon: this.bbox[2],
       }
-      const urladdress = `http://127.0.0.1:8000/api/filtered-apartments`
+      const urladdress = `http://127.0.0.1:8000/api/all-filtered-apartments`
       axios.get(urladdress, { params })
         .then(resp => {
           this.success = resp.data.success
@@ -129,7 +129,7 @@ export default {
           });
 
           if (filteredResults.length > 0) {
-            this.suggestions = filteredResults;
+            // this.suggestions = filteredResults;
             // Restituisci il risultato più simile tra quelli filtrati
             const mostSimilarResult = filteredResults[0];
             this.getPosition(mostSimilarResult);
