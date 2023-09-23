@@ -36,6 +36,17 @@ export default {
 </script>
 
 <template lang="">
+    <div class="container-fluid navbar-container">
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-3 ">
+
+                    <a href="" >Ricerca Avanzata</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <div class="container-fluid jumbotron-container d-none d-md-block">
         <div class="row">
             <div class="col-12 p-0" disabled>
