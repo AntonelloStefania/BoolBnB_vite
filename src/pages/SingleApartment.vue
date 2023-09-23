@@ -1,5 +1,6 @@
 <script>
 
+
 import axios from 'axios';
 import { store } from '../store.js';
 // import ContactForm from '../components/ContactForm.vue';
@@ -228,10 +229,10 @@ export default {
                                 <span class="" ><span class="brand">Grandezza</span> alloggio: </span><span class="fw-bold " >{{apartment.mq}} <span class="fs-5">&#x33A1;</span> </span>
                             </li>
                             <li class="">
-                                <span class="">Numero di <span class="brand">Stanze:</span> </span> <span class="ms-2 fw-bold ">{{apartment.n_rooms}}<i class="fa-solid fa-bed ms-2" style="color: #4f5153;"></i></span>
+                                <span class="">Numero di <span class="brand">Stanze:</span> </span> <span class="mx-2 fw-bold ">{{apartment.n_rooms}}<img src="../assets/icons8-posto-letto-occupato-24.png" class="ms-1" alt=""></span>
                             </li>
                             <li class="">
-                                <span class="">Numero di <span class="brand">Bagni:</span> </span> <span class="ms-2 fw-bold ">{{apartment.n_wc}}<i class="fa-solid fa-toilet-paper ms-2" style="color: #4f5153;"></i></span>
+                                <span class="">Numero di <span class="brand">Bagni:</span> </span> <span class="ms-2 fw-bold ">{{apartment.n_wc}}<img src="../assets/icons8-carta-igienica-24.png" class="ms-1" alt=""></span>
                             </li>
                         </ul>
                     
@@ -253,10 +254,11 @@ export default {
                                <span><span class="brand">Prezzo</span> per Notte: </span><span class="ms-2 fw-bold">{{apartment.price}}&euro;</span>
                             </li>
                             <li class="">
-                               <span><span class="brand">Indirizzo</span>: </span><span class="ms-2 ">{{apartment.address}} <i class="fa-solid fa-location-dot ms-1" style="color: #4f5153;"></i></span>
+                               <span><span class="brand">Indirizzo</span>: </span><span class="ms-2 ">{{apartment.address}} <img src="../assets/icons8-codice-regione-25.png" class="ms-1" alt=""></span>
                             </li>
                             <li class="">
-                                <span><span class="brand">Descrizione</span>: </span><span class="ms-2">{{apartment.description}}</span>
+                                <span><span class="brand">Descrizione</span>: </span><span class="ms-2">{{apartment.description}}  </span>
+                            
                              </li>
                         </ul>
                    
