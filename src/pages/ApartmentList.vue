@@ -15,7 +15,9 @@ export default {
       store,
       apartments: [],
       address: '',
-      n_wc_min: '',
+      wc: '',
+      mq: '',
+      rooms: '',
       suggestions: [],
       suggestionLon: '',
       suggestionLat: '',
@@ -35,7 +37,7 @@ export default {
         if (response.data.success) {
           this.apartments = response.data.results;
           this.message= '';
-          if (this.address != '') {
+          if (this.address != '' || this.wc != '' || this.rooms != '' || this.mq != '') {
             this.filteredApartments();
           }
         }
@@ -54,6 +56,9 @@ export default {
         max_lat: this.bbox[3],
         min_lon: this.bbox[0],
         max_lon: this.bbox[2],
+        wc: this.wc,
+        rooms: this.rooms,
+        mq: this.mq,
       }
       const urladdress = `http://127.0.0.1:8000/api/filtered-apartments`
       axios.get(urladdress, { params })
@@ -167,11 +172,21 @@ export default {
                 <h1 class="text-center text-primary mb-5">BnB - APARTMENTS</h1>
             </div>
             <div class="col-12">
+              <!-- INPUT INDIRIZZO -->
               <label for="address">Cerca un indirizzo</label>
               <input list="suggestions" type="text" name="address" id="address" @input="getSuggetions()" v-model="address">
               <datalist id="suggestions">
                 <option v-for="suggestion in suggestions" :value="suggestion.address.freeformAddress">{{suggestion.address.freeformAddress}}</option>
               </datalist>
+              <!-- INPUT MQ -->
+              <label for="mq">Inserisci il numero di mq minimo</label>
+              <input type="number" name="mq" id="mq" v-model="mq">
+              <!-- INPUT STANZE -->
+              <label for="rooms">Inserisci il numero minimo di stanze</label>
+              <input type="number" name="rooms" id="rooms" v-model="rooms">
+              <!-- INPUT BAGNI -->
+              <label for="wc">Inserisci il numero minimo di bagni</label>
+              <input type="number" name="wc" id="wc" v-model="wc">
               <!-- <input type="number" v-model="n_wc_min"> -->
               <button @click="getApartments()">
                 avvia ricerca
