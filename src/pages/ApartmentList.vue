@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     getApartments() {
-      axios.get(`${this.store.baseUrl}/api/apartments`).then((response) => {
+      axios.get(`${this.store.baseUrl}/api/all-apartments`).then((response) => {
         if (response.data.success) {
           this.apartments = response.data.results;
           this.message= '';

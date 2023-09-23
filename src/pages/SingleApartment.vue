@@ -257,7 +257,7 @@ export default {
                                <span><span class="brand">Indirizzo</span>: </span><span class="ms-2 ">{{apartment.address}} <img src="../assets/icons8-codice-regione-25.png" class="ms-1" alt=""></span>
                             </li>
                             <li class="">
-                                <span><span class="brand">Descrizione</span>: </span><span class="ms-2">{{apartment.description}}  </span>
+                                <span><span class="brand">Descrizione</span>: </span><span class="ms-2 w-break">{{apartment.description}}  </span>
                             
                              </li>
                         </ul>
@@ -387,5 +387,7 @@ export default {
     border-radius:0.3rem
 }
 
-
+.w-break{
+    overflow-wrap: break-word;
+}
 </style>
