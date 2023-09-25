@@ -33,34 +33,46 @@ export default {
   },
   methods: {
     getApartments() {
-      axios.get(`${this.store.baseUrl}/api/all-apartments`).then((response) => {
-        if (response.data.success) {
-          this.apartments = response.data.results;
-          this.message= '';
-          if (this.address != '' || this.wc != '' || this.rooms != '' || this.mq != '') {
-            this.filteredApartments();
+      if (this.address != '' || this.wc != '' || this.rooms != '' || this.mq != '') {
+        this.message= '';
+        this.filteredApartments();
+      } else{
+        axios.get(`${this.store.baseUrl}/api/all-apartments`).then((response) => {
+          if (response.data.success) {
+            this.apartments = response.data.results;
+            
+  
           }
-        }
-        else {
-          //
-        }
-      })
+          else {
+            //
+          }
+        })
+      }
     },
 
 
 
     filteredApartments() {
 
-      const params = {
-        min_lat: this.bbox[1],
-        max_lat: this.bbox[3],
-        min_lon: this.bbox[0],
-        max_lon: this.bbox[2],
-        wc: this.wc,
-        rooms: this.rooms,
-        mq: this.mq,
-      }
-      const urladdress = `http://127.0.0.1:8000/api/filtered-apartments`
+      const params = {};
+
+      if (this.bbox !== '') {
+        params.min_lat = this.bbox[1];
+        params.min_lon = this.bbox[0];
+        params.max_lat = this.bbox[3];
+        params.max_lon = this.bbox[2];
+      };
+      if(this.wc !== ''){
+        params.wc = this.wc;
+      };
+      if(this.rooms !== ''){
+        params.rooms = this.rooms;
+      };
+      if(this.mq !== ''){
+        params.mq = this.mq;
+      };
+
+      const urladdress = `http://127.0.0.1:8000/api/all-filtered-apartments`
       axios.get(urladdress, { params })
         .then(resp => {
           this.success = resp.data.success
