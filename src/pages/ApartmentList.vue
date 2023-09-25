@@ -15,7 +15,10 @@ export default {
       store,
       apartments: [],
       address: '',
-      n_wc_min: '',
+      wc: '',
+      mq: '',
+      rooms: '',
+      beds: '',
       suggestions: [],
       suggestionLon: '',
       suggestionLat: '',
@@ -31,31 +34,57 @@ export default {
   },
   methods: {
     getApartments() {
-      axios.get(`${this.store.baseUrl}/api/all-apartments`).then((response) => {
-        if (response.data.success) {
-          this.apartments = response.data.results;
-          this.message= '';
-          if (this.address != '') {
-            this.filteredApartments();
+      this.message= '';
+      if (this.address != '' || this.wc != '' || this.rooms != '' || this.mq != '') {
+        this.filteredApartments();
+      } else{
+        axios.get(`${this.store.baseUrl}/api/all-apartments`).then((response) => {
+          if (response.data.success) {
+            this.apartments = response.data.results;
+            
+  
           }
-        }
-        else {
-          //
-        }
-      })
+          else {
+            //
+          }
+        })
+      }
     },
 
 
 
     filteredApartments() {
 
-      const params = {
-        min_lat: this.bbox[1],
-        max_lat: this.bbox[3],
-        min_lon: this.bbox[0],
-        max_lon: this.bbox[2],
-      }
-      const urladdress = `http://127.0.0.1:8000/api/filtered-apartments`
+      // Calcola il bounding box intorno al punto inserito
+      this.bbox = [
+        this.suggestionLon - (this.distance / 111.32), // Longitudine minima
+        this.suggestionLat - (this.distance / 111.32),  // Latitudine minima
+        this.suggestionLon + (this.distance / (111.32 * Math.cos(this.suggestionLat * (Math.PI / 180)))), // Longitudine massima
+        this.suggestionLat + (this.distance / 111.32), // Latitudine massima
+      ];
+
+      const params = {};
+
+      if (this.bbox !== '') {
+        params.min_lat = this.bbox[1];
+        params.min_lon = this.bbox[0];
+        params.max_lat = this.bbox[3];
+        params.max_lon = this.bbox[2];
+      };
+      if(this.wc !== ''){
+        params.wc = this.wc;
+      };
+      if(this.rooms !== ''){
+        params.rooms = this.rooms;
+      };
+      if(this.mq !== ''){
+        params.mq = this.mq;
+      };
+      if(this.beds !== ''){
+        params.beds = this.beds;
+      };
+
+      const urladdress = `http://127.0.0.1:8000/api/all-filtered-apartments`
       axios.get(urladdress, { params })
         .then(resp => {
           this.success = resp.data.success
@@ -74,7 +103,10 @@ export default {
         })
         .catch(error => {
           console.error(error);
-        });
+        })
+        .finally(() => {
+          this.bbox = '';
+        })
     },
 
 
@@ -142,19 +174,12 @@ export default {
         .catch(error => {
           // gestire gli errori
           console.log("Errore: " + error.message);
-        });
+        })
     },
     getPosition(data) {
       console.log('sono qui')
       this.suggestionLat = data.position.lat;
       this.suggestionLon = data.position.lon;
-      // Calcola il bounding box intorno al punto inserito
-      this.bbox = [
-        this.suggestionLon - (this.distance / 111.32), // Longitudine minima
-        this.suggestionLat - (this.distance / 111.32),  // Latitudine minima
-        this.suggestionLon + (this.distance / (111.32 * Math.cos(this.suggestionLat * (Math.PI / 180)))), // Longitudine massima
-        this.suggestionLat + (this.distance / 111.32), // Latitudine massima
-      ];
     }
   }
 }
@@ -174,11 +199,24 @@ export default {
                 <h1 class="text-center text-primary mb-5">BnB - APARTMENTS</h1>
             </div>
             <div class="col-12">
+              <!-- INPUT INDIRIZZO -->
               <label for="address">Cerca un indirizzo</label>
               <input list="suggestions" type="text" name="address" id="address" @input="getSuggetions()" v-model="address">
               <datalist id="suggestions">
                 <option v-for="suggestion in suggestions" :value="suggestion.address.freeformAddress">{{suggestion.address.freeformAddress}}</option>
               </datalist>
+              <!-- INPUT MQ -->
+              <label for="mq">Inserisci il numero di mq minimo</label>
+              <input type="number" name="mq" id="mq" v-model="mq">
+              <!-- INPUT STANZE -->
+              <label for="rooms">Inserisci il numero minimo di stanze</label>
+              <input type="number" name="rooms" id="rooms" v-model="rooms">
+              <!-- INPUT BAGNI -->
+              <label for="wc">Inserisci il numero minimo di bagni</label>
+              <input type="number" name="wc" id="wc" v-model="wc">
+              <!-- INPUT LETTI -->
+              <label for="beds">Inserisci il numero minimo di posti letto</label>
+              <input type="number" name="beds" id="beds" v-model="beds">
               <!-- <input type="number" v-model="n_wc_min"> -->
               <button @click="getApartments()">
                 avvia ricerca
