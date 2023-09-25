@@ -18,6 +18,7 @@ export default {
       wc: '',
       mq: '',
       rooms: '',
+      beds: '',
       suggestions: [],
       suggestionLon: '',
       suggestionLat: '',
@@ -33,8 +34,8 @@ export default {
   },
   methods: {
     getApartments() {
+      this.message= '';
       if (this.address != '' || this.wc != '' || this.rooms != '' || this.mq != '') {
-        this.message= '';
         this.filteredApartments();
       } else{
         axios.get(`${this.store.baseUrl}/api/all-apartments`).then((response) => {
@@ -54,6 +55,14 @@ export default {
 
     filteredApartments() {
 
+      // Calcola il bounding box intorno al punto inserito
+      this.bbox = [
+        this.suggestionLon - (this.distance / 111.32), // Longitudine minima
+        this.suggestionLat - (this.distance / 111.32),  // Latitudine minima
+        this.suggestionLon + (this.distance / (111.32 * Math.cos(this.suggestionLat * (Math.PI / 180)))), // Longitudine massima
+        this.suggestionLat + (this.distance / 111.32), // Latitudine massima
+      ];
+
       const params = {};
 
       if (this.bbox !== '') {
@@ -70,6 +79,9 @@ export default {
       };
       if(this.mq !== ''){
         params.mq = this.mq;
+      };
+      if(this.beds !== ''){
+        params.beds = this.beds;
       };
 
       const urladdress = `http://127.0.0.1:8000/api/all-filtered-apartments`
@@ -91,7 +103,10 @@ export default {
         })
         .catch(error => {
           console.error(error);
-        });
+        })
+        .finally(() => {
+          this.bbox = '';
+        })
     },
 
 
@@ -159,19 +174,12 @@ export default {
         .catch(error => {
           // gestire gli errori
           console.log("Errore: " + error.message);
-        });
+        })
     },
     getPosition(data) {
       console.log('sono qui')
       this.suggestionLat = data.position.lat;
       this.suggestionLon = data.position.lon;
-      // Calcola il bounding box intorno al punto inserito
-      this.bbox = [
-        this.suggestionLon - (this.distance / 111.32), // Longitudine minima
-        this.suggestionLat - (this.distance / 111.32),  // Latitudine minima
-        this.suggestionLon + (this.distance / (111.32 * Math.cos(this.suggestionLat * (Math.PI / 180)))), // Longitudine massima
-        this.suggestionLat + (this.distance / 111.32), // Latitudine massima
-      ];
     }
   }
 }
@@ -206,6 +214,9 @@ export default {
               <!-- INPUT BAGNI -->
               <label for="wc">Inserisci il numero minimo di bagni</label>
               <input type="number" name="wc" id="wc" v-model="wc">
+              <!-- INPUT LETTI -->
+              <label for="beds">Inserisci il numero minimo di posti letto</label>
+              <input type="number" name="beds" id="beds" v-model="beds">
               <!-- <input type="number" v-model="n_wc_min"> -->
               <button @click="getApartments()">
                 avvia ricerca
