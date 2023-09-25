@@ -35,7 +35,7 @@ export default {
   methods: {
     getApartments() {
       this.message= '';
-      if (this.address != '' || this.wc != '' || this.rooms != '' || this.mq != '') {
+      if (this.address != '' || this.wc != '' || this.rooms != '' || this.mq != '' || this.beds != '') {
         this.filteredApartments();
       } else{
         axios.get(`${this.store.baseUrl}/api/all-apartments`).then((response) => {
@@ -55,13 +55,15 @@ export default {
 
     filteredApartments() {
 
-      // Calcola il bounding box intorno al punto inserito
-      this.bbox = [
-        this.suggestionLon - (this.distance / 111.32), // Longitudine minima
-        this.suggestionLat - (this.distance / 111.32),  // Latitudine minima
-        this.suggestionLon + (this.distance / (111.32 * Math.cos(this.suggestionLat * (Math.PI / 180)))), // Longitudine massima
-        this.suggestionLat + (this.distance / 111.32), // Latitudine massima
-      ];
+      if(this.suggestionLat !== ''){
+        // Calcola il bounding box intorno al punto inserito
+        this.bbox = [
+          this.suggestionLon - (this.distance / 111.32), // Longitudine minima
+          this.suggestionLat - (this.distance / 111.32),  // Latitudine minima
+          this.suggestionLon + (this.distance / (111.32 * Math.cos(this.suggestionLat * (Math.PI / 180)))), // Longitudine massima
+          this.suggestionLat + (this.distance / 111.32), // Latitudine massima
+        ];
+      }
 
       const params = {};
 
@@ -187,44 +189,73 @@ export default {
 
 <template lang="">
   <div class="container-fluid navbar-container">
-        <div class="row  w-100">
-            <div class="col-4 col-lg-2 py-3 d-flex justify-content-end">
-                <router-link :to="{name: 'home'}"  class="fw-bold" style="text-decoration:none; color:#3a537e;"><i class="fa-regular fa-circle-left" style="color: #3a537e;"></i> Annunci in Evidenza  </router-link>
-            </div>
-        </div>
-    </div>
+      <div class="row  w-100">
+          <div class="col-4 col-lg-2 py-3 d-flex justify-content-end">
+              <router-link :to="{name: 'home'}"  class="fw-bold" style="text-decoration:none; color:#3a537e;"><i class="fa-regular fa-circle-left" style="color: #3a537e;"></i> Annunci in Evidenza  </router-link>
+          </div>
+      </div>
+  </div>
+  <div class="container-fluid card-container py-3">
     <div class="container">
-        <div class="row">
+      <div class="row">
             <div class="col-12">
-                <h1 class="text-center text-primary mb-5">BnB - APARTMENTS</h1>
+                <h1 class="text-center text-primary mb-3">BnB - APARTMENTS</h1>
             </div>
-            <div class="col-12">
-              <!-- INPUT INDIRIZZO -->
-              <label for="address">Cerca un indirizzo</label>
-              <input list="suggestions" type="text" name="address" id="address" @input="getSuggetions()" v-model="address">
-              <datalist id="suggestions">
-                <option v-for="suggestion in suggestions" :value="suggestion.address.freeformAddress">{{suggestion.address.freeformAddress}}</option>
-              </datalist>
-              <!-- INPUT MQ -->
-              <label for="mq">Inserisci il numero di mq minimo</label>
-              <input type="number" name="mq" id="mq" v-model="mq">
-              <!-- INPUT STANZE -->
-              <label for="rooms">Inserisci il numero minimo di stanze</label>
-              <input type="number" name="rooms" id="rooms" v-model="rooms">
-              <!-- INPUT BAGNI -->
-              <label for="wc">Inserisci il numero minimo di bagni</label>
-              <input type="number" name="wc" id="wc" v-model="wc">
-              <!-- INPUT LETTI -->
-              <label for="beds">Inserisci il numero minimo di posti letto</label>
-              <input type="number" name="beds" id="beds" v-model="beds">
+            <div class="col-12 text-center">
+              <div class="d-flex justify-content-around">
+                <div>
+                  <!-- INPUT INDIRIZZO -->
+                  <label class="control-label fw-bold mb-2  " for="address"><span class="brand">Indirizzo</span></label>
+                  <input type="text" list="suggestions" id="address" name="address" class="form-control" @input="getSuggetions()" v-model="address"> 
+                  <datalist id="suggestions">
+                    <option v-for="suggestion in suggestions" :value="suggestion.address.freeformAddress">{{suggestion.address.freeformAddress}}</option>
+                  </datalist>                                 
+                </div>
+                <div>
+                  <!-- INPUT RAGGIO DI RICERCA -->
+                  <label class="control-label fw-bold mb-2  " for="distance"><span class="brand">Raggio</span> di ricerca: {{distance}} Km</label>
+                  <input type="range" id="distance" name="distance" min="0" max="100" class="form-range" v-model="distance">
+                </div>
+              </div>
+              <div class="my-3 d-flex justify-content-between">
+                <div>
+                  <!-- INPUT MQ -->
+                  <label class="control-label fw-bold mb-2  " for="mq">Numero di <span class="brand">mq</span> minimi </label>
+                  <div class="d-flex justify-content-center">
+                      <input type="number" id="mq" name="mq" class="form-control" style="width:4.25rem" v-model="mq"><span class="align-self-center fw-bold ms-2"> &#x33A1;</span>
+                  </div>
+                </div>
+                <div>                  
+                  <!-- INPUT STANZE -->
+                  <label class="control-label fw-bold mb-2  " for="rooms">Numero di <span class="brand">stanze</span> minime </label>
+                  <div class="d-flex justify-content-center">
+                      <input type="number" id="rooms" name="rooms" class="form-control" style="width:4.25rem" v-model="rooms"><i class="fa-solid fa-building ms-2 align-self-center" style="color: #4f5153;"></i>
+                  </div>
+                </div>
+                <div>
+                  <!-- INPUT BAGNI -->
+                  <label class="control-label fw-bold mb-2  " for="wc">Numero di <span class="brand">bagni</span> minimi </label>
+                  <div class="d-flex justify-content-center">
+                      <input type="number" id="wc" name="wc" class="form-control" style="width:4.25rem" v-model="wc"><i class="fa-solid fa-toilet-paper ms-2 align-self-center" style="color: #4f5153;"></i>
+                  </div>
+                </div>
+                <div>
+                  <!-- INPUT LETTI -->
+                  <label class="control-label fw-bold mb-2  " for="beds">Numero di <span class="brand">posti letto</span> minimi </label>
+                  <div class="d-flex justify-content-center">
+                      <input type="number" id="beds" name="beds" class="form-control" style="width:4.25rem" v-model="beds"><i class="fa-solid fa-bed ms-2 align-self-center" style="color: #4f5153;"></i>
+                  </div>
+                </div>
+              </div>
               <!-- <input type="number" v-model="n_wc_min"> -->
-              <button @click="getApartments()">
-                avvia ricerca
+              <button class="blue-btn btn" @click="getApartments()">
+                Avvia ricerca
               </button>
               <h1>{{this.message}}</h1>
             </div>
         </div>
     </div>
+  </div>
     <div class="container mt-5">
       <div class="row justify-content-start my-5">
         
@@ -241,4 +272,9 @@ export default {
     
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.card-container {
+    background-color: #f7ecd1;
+    margin: 0;
+}
+</style>
