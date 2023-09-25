@@ -10,8 +10,8 @@ export default {
     components: {
         // ContactForm
     }, props: {
-    apartment: Object
-  },
+        apartment: Object
+    },
     data() {
         return {
             store,
@@ -245,6 +245,9 @@ export default {
                             <li class="">
                                 <span class="">Numero di <span class="brand">Bagni:</span> </span> <span class="ms-2 fw-bold ">{{apartment.n_wc}}<img src="../assets/icons8-carta-igienica-24.png" class="ms-1" alt=""></span>
                             </li>
+                            <li class="">
+                                <span class="">Numero di <span class="brand">Letti:</span> </span> <span class="ms-2 fw-bold ">{{apartment.n_beds}}<img src="../assets/icons8-carta-igienica-24.png" class="ms-1" alt=""></span>
+                            </li>
                         </ul>
                     
                 </div>
@@ -356,49 +359,52 @@ export default {
 }
 
 
-.cover{
-    border-radius:2rem; 
-    border:2px solid rgb(64, 64, 66);
-     width:100% ;
-     height:500px
+.cover {
+    border-radius: 2rem;
+    border: 2px solid rgb(64, 64, 66);
+    width: 100%;
+    height: 500px
 }
 
-.type-icon{
+.type-icon {
     width: 2rem;
 }
 
-.box img{
-	height: 100%;
-	width: 100%;
-	object-fit:cover;
-	-o-object-fit:cover;
+.box img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    -o-object-fit: cover;
 }
 
-.gal-container{
+.gal-container {
     height: 600px;
-    overflow:auto;
-    scrollbar-width: none; /* Nasconde la scrollbar standard in Firefox */
-    -webkit-scrollbar-width: none; 
+    overflow: auto;
+    scrollbar-width: none;
+    /* Nasconde la scrollbar standard in Firefox */
+    -webkit-scrollbar-width: none;
 }
 
 .gal-container::-webkit-scrollbar {
-    display: none; /* Nasconde la scrollbar in Webkit */
+    display: none;
+    /* Nasconde la scrollbar in Webkit */
 }
-.apartment-list li{
+
+.apartment-list li {
     min-height: 2.5rem
 }
 
-.custom-form{
-    border-top:0 !important;
-    border-left:0 !important;
-    border-right:0 !important;
+.custom-form {
+    border-top: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
 }
 
-.contact-img{
-    border-radius:0.3rem
+.contact-img {
+    border-radius: 0.3rem
 }
 
-.w-break{
+.w-break {
     overflow-wrap: break-word;
 }
 </style>
