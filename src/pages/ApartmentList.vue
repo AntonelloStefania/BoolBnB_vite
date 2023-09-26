@@ -14,7 +14,7 @@ export default {
     return {
       store,
       apartments: [],
-      address: '',
+      address: this.$route.query.homeAddress ? this.$route.query.homeAddress : '',
       wc: '',
       mq: '',
       rooms: '',
@@ -24,19 +24,30 @@ export default {
       suggestionLat: '',
       bbox: [],
       distance: 20,
-      message: ''
+      message: '',
+      services: [],
     }
   },
   created() {
   },
   mounted() {
     this.getApartments();
+    this.getServices();
   },
   methods: {
     getApartments() {
       this.message= '';
-      if (this.address != '' || this.wc != '' || this.rooms != '' || this.mq != '' || this.beds != '') {
+      if(this.address === ''){
+        this.suggestionLat = '';
+        this.suggestionLon = '';
+      }
+      if(this.$route.query.homeAddress !== ""){
+        this.suggestionLat = Number(this.$route.query.homeSuggestionLat);
+        this.suggestionLon = Number(this.$route.query.homeSuggestionLon);
+      }
+      if (this.address !== '' || this.wc != '' || this.rooms != '' || this.mq != '' || this.beds != '') {
         this.filteredApartments();
+        this.$route.query.homeAddress = '';
       } else{
         axios.get(`${this.store.baseUrl}/api/all-apartments`).then((response) => {
           if (response.data.success) {
@@ -51,10 +62,20 @@ export default {
       }
     },
 
+    getServices(){
+      axios.get(this.store.baseUrl + '/api/services').then((response) => {
+        if(response.data.success){
+          this.services = response.data.results;
+          console.log(this.services);
+        } else {
+          //
+        }
+      })
+    },
 
 
     filteredApartments() {
-
+      
       if(this.suggestionLat !== ''){
         // Calcola il bounding box intorno al punto inserito
         this.bbox = [
@@ -185,6 +206,47 @@ export default {
     }
   }
 }
+//SELEZIONE SERVIZI IN EDIT (CHECKBOX)
+
+
+  const clickableServices = document.querySelectorAll('.clickable-service');
+
+  clickableServices.forEach(function (clickableService) {
+    // Trova l'ID della checkbox associata all'immagine
+    const checkboxId = clickableService.getAttribute('data-checkbox-id');
+
+    // Trova la checkbox corrispondente
+    const checkbox = document.getElementById(checkboxId);
+
+    // Controlla se la checkbox è selezionata inizialmente
+    if (checkbox && checkbox.checked) {
+      clickableService.style.backgroundColor = '#C0C9E1';
+      clickableService.style.borderRadius = '0.5rem'
+    }
+
+    clickableService.addEventListener('click', function () {
+      // Trova nuovamente la checkbox
+      const checkbox = document.getElementById(checkboxId);
+
+      if (checkbox) {
+        // Cambia lo stato della checkbox
+        checkbox.checked = !checkbox.checked;
+
+        // Simula il cambiamento dell'aspetto della checkbox
+        if (checkbox.checked) {
+          clickableService.style.backgroundColor = '#C0C9E1';
+          clickableService.style.borderRadius = '0.5rem'
+        } else {
+          clickableService.style.backgroundColor = 'transparent';
+        }
+      }
+    });
+
+    // Impedisci al clic sull'immagine di attivare la checkbox direttamente
+    clickableService.addEventListener('click', function (e) {
+      e.preventDefault();
+    });
+  });
 </script>
 
 <template lang="">
@@ -214,7 +276,7 @@ export default {
                 <div>
                   <!-- INPUT RAGGIO DI RICERCA -->
                   <label class="control-label fw-bold mb-2  " for="distance"><span class="brand">Raggio</span> di ricerca: {{distance}} Km</label>
-                  <input type="range" id="distance" name="distance" min="0" max="100" class="form-range" v-model="distance">
+                  <input type="range" id="distance" name="distance" min="1" max="25" class="form-range" v-model="distance">
                 </div>
               </div>
               <div class="my-3 d-flex justify-content-between">
@@ -222,28 +284,39 @@ export default {
                   <!-- INPUT MQ -->
                   <label class="control-label fw-bold mb-2  " for="mq">Numero di <span class="brand">mq</span> minimi </label>
                   <div class="d-flex justify-content-center">
-                      <input type="number" id="mq" name="mq" class="form-control" style="width:4.25rem" v-model="mq"><span class="align-self-center fw-bold ms-2"> &#x33A1;</span>
+                      <input type="number" id="mq" name="mq" min="1" class="form-control" style="width:4.25rem" v-model="mq"><span class="align-self-center fw-bold ms-2"> &#x33A1;</span>
                   </div>
                 </div>
                 <div>                  
                   <!-- INPUT STANZE -->
                   <label class="control-label fw-bold mb-2  " for="rooms">Numero di <span class="brand">stanze</span> minime </label>
                   <div class="d-flex justify-content-center">
-                      <input type="number" id="rooms" name="rooms" class="form-control" style="width:4.25rem" v-model="rooms"><i class="fa-solid fa-building ms-2 align-self-center" style="color: #4f5153;"></i>
+                      <input type="number" id="rooms" name="rooms" min="1" class="form-control" style="width:4.25rem" v-model="rooms"><i class="fa-solid fa-building ms-2 align-self-center" style="color: #4f5153;"></i>
                   </div>
                 </div>
                 <div>
                   <!-- INPUT BAGNI -->
                   <label class="control-label fw-bold mb-2  " for="wc">Numero di <span class="brand">bagni</span> minimi </label>
                   <div class="d-flex justify-content-center">
-                      <input type="number" id="wc" name="wc" class="form-control" style="width:4.25rem" v-model="wc"><i class="fa-solid fa-toilet-paper ms-2 align-self-center" style="color: #4f5153;"></i>
+                      <input type="number" id="wc" name="wc" min="1" class="form-control" style="width:4.25rem" v-model="wc"><i class="fa-solid fa-toilet-paper ms-2 align-self-center" style="color: #4f5153;"></i>
                   </div>
                 </div>
                 <div>
                   <!-- INPUT LETTI -->
                   <label class="control-label fw-bold mb-2  " for="beds">Numero di <span class="brand">posti letto</span> minimi </label>
                   <div class="d-flex justify-content-center">
-                      <input type="number" id="beds" name="beds" class="form-control" style="width:4.25rem" v-model="beds"><i class="fa-solid fa-bed ms-2 align-self-center" style="color: #4f5153;"></i>
+                      <input type="number" id="beds" name="beds" min="1" class="form-control" style="width:4.25rem" v-model="beds"><i class="fa-solid fa-bed ms-2 align-self-center" style="color: #4f5153;"></i>
+                  </div>
+                </div>
+              </div>
+              <!-- INPUT SERVIZI -->
+                <div class="col-12 d-flex my-5 justify-content-between">
+                  <div class="d-flex flex-column" v-for="(service, index) in services" :key="index">
+                    <label class="form-check-label pb-2 position-relative d-flex change-cursor justify-content-center align-items-center align-self-center"  style="width:50px; height:50px;" :for="service.id">
+                        <input class="form-check-input m-1" type="checkbox" name="services[]" style=" border:none; background-color:transparent; width:35px; height:35px;" :value='service.id' :id="service.id">
+                        <img :src="service.icons" style="width:50px; height:50px; border: 2px solid transparent;" alt="" class="position-absolute clickable-service" :data-checkbox-id="service.id">
+                    </label>
+                    <span class="text-center">{{service.name}}</span>
                   </div>
                 </div>
               </div>
@@ -255,7 +328,6 @@ export default {
             </div>
         </div>
     </div>
-  </div>
     <div class="container mt-5">
       <div class="row justify-content-start my-5">
         

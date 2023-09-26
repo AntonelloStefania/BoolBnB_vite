@@ -28,10 +28,10 @@ export default {
     },
     methods: {
         getApartments() {
-            this.message= '';
-            if (this.address != '') {
-                this.filteredApartments();
-            } else {
+            // this.message= '';
+            // if (this.address != '') {
+            //     this.filteredApartments();
+            // } else {
                 axios.get(`${this.store.baseUrl}/api/apartments`).then((response) => {
                     if (response.data.success) {
                     this.apartments = response.data.results;
@@ -41,37 +41,37 @@ export default {
                     //
                     }
                 })
-            }
+            // }
         },
-        filteredApartments() {
+        // filteredApartments() {
 
-            const params = {
-            min_lat: this.bbox[1],
-            max_lat: this.bbox[3],
-            min_lon: this.bbox[0],
-            max_lon: this.bbox[2],
-            }
-            const urladdress = `http://127.0.0.1:8000/api/filtered-apartments`
-            axios.get(urladdress, { params })
-            .then(resp => {
-                this.success = resp.data.success
-                if (this.success) {
-                this.message = '';
-                if (resp.data.results) {
-                    this.apartments = resp.data.results;
-                }
-                else if (resp.data.message) {
-                    this.message = resp.data.message;
-                    this.apartments = '';
-                }
-                } else {
-                this.errors = resp.data.errors;
-                }
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        },
+        //     const params = {
+        //     min_lat: this.bbox[1],
+        //     max_lat: this.bbox[3],
+        //     min_lon: this.bbox[0],
+        //     max_lon: this.bbox[2],
+        //     }
+        //     const urladdress = `http://127.0.0.1:8000/api/filtered-apartments`
+        //     axios.get(urladdress, { params })
+        //     .then(resp => {
+        //         this.success = resp.data.success
+        //         if (this.success) {
+        //         this.message = '';
+        //         if (resp.data.results) {
+        //             this.apartments = resp.data.results;
+        //         }
+        //         else if (resp.data.message) {
+        //             this.message = resp.data.message;
+        //             this.apartments = '';
+        //         }
+        //         } else {
+        //         this.errors = resp.data.errors;
+        //         }
+        //     })
+        //     .catch(error => {
+        //         console.error(error);
+        //     });
+        // },
         getSuggetions() {
             let options = {
             method: "GET",
@@ -206,9 +206,12 @@ export default {
                 <option v-for="suggestion in suggestions" :value="suggestion.address.freeformAddress">{{suggestion.address.freeformAddress}}</option>
               </datalist>
               <!-- <input type="number" v-model="n_wc_min"> -->
-              <button @click="getApartments()">
+              <!-- <button @click="getApartments()">
                 avvia ricerca
-              </button>
+              </button> -->
+              <router-link class="btn btn-primary" :to="{ name: 'apartments', query: { homeAddress: this.address, homeSuggestionLat: this.suggestionLat, homeSuggestionLon: this.suggestionLon}}">
+                Avvia ricerca
+              </router-link>
               <h1>{{this.message}}</h1>
             </div>
         </div>
