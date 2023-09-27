@@ -187,14 +187,14 @@ export default {
                                 {{apartment.title}}
                             </h2>
                         </div>
-                        <div class="col-12 d-flex flex-column flex-md-row ">
-                            <div class="col-12  col-md-4 d-flex align-items-center order-2 order-md-1 mx-md-3 mb-3">
+                        <div class="col-12 d-flex flex-column flex-lg-row ">
+                            <div class="col-12  col-lg-4 d-flex align-items-center order-2 order-lg-1 mx-lg-3 mb-3">
                                 <img :src="`${store.baseUrl}/storage/${apartment.cover}`" class="cover">
                             </div>
-                            <div class="col-12 m-0 col-md-8  text-center order-2 order-md-2  justify-content-center mb-3 " >
+                            <div class="col-12 m-0 col-lg-8  text-center order-2 order-lg-2  justify-content-center mb-3 " >
                                 <div class="container gal-container ">
                                     <div class="gal-item d-flex flex-wrap justify-content-center">
-                                        <div class="box col-12 col-md-5 m-2  img-container  " v-for="photo in apartment.photos" :key="photo.id">
+                                        <div class="box col-12 col-lg-5 m-2  img-container  " v-for="photo in apartment.photos" :key="photo.id">
                                             <img :src="`${store.baseUrl}/storage/${photo.url}`" class="col-6" style="border-radius:1.25rem" >
                                         </div>
                                     </div>
@@ -337,12 +337,15 @@ export default {
     }
 }
 
-
+.img-container{
+    max-width:300px;
+    height: 230px;
+}
 .cover {
     border-radius: 2rem;
     border: 2px solid rgb(64, 64, 66);
     width: 100%;
-    height: 500px
+  
 }
 
 .type-icon {
