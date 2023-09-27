@@ -247,85 +247,85 @@ export default {
   <div class="container-fluid  py-3">
     <div class="container">
       <div class="row">
-            <div class="col-12">
-                <h1 class="text-center text-primary mb-3">BnB - APARTMENTS</h1>
+        <div class="col-12">
+            <h1 class="text-center text-primary mb-3">BnB - APARTMENTS</h1>
+        </div>
+        <div class="col-12 text-center">
+          <div class="d-flex justify-content-around">
+            <div>
+              <!-- INPUT INDIRIZZO -->
+              <label class="control-label fw-bold mb-2  " for="address"><span class="brand">Indirizzo</span></label>
+              <input type="text" list="suggestions" id="address" name="address" class="form-control" @input="getSuggetions()" v-model="address"> 
+              <datalist id="suggestions">
+                <option v-for="suggestion in suggestions" :value="suggestion.address.freeformAddress">{{suggestion.address.freeformAddress}}</option>
+              </datalist>                                 
             </div>
-            <div class="col-12 text-center">
-              <div class="d-flex justify-content-around">
-                <div>
-                  <!-- INPUT INDIRIZZO -->
-                  <label class="control-label fw-bold mb-2  " for="address"><span class="brand">Indirizzo</span></label>
-                  <input type="text" list="suggestions" id="address" name="address" class="form-control" @input="getSuggetions()" v-model="address"> 
-                  <datalist id="suggestions">
-                    <option v-for="suggestion in suggestions" :value="suggestion.address.freeformAddress">{{suggestion.address.freeformAddress}}</option>
-                  </datalist>                                 
-                </div>
-                <div>
-                  <!-- INPUT RAGGIO DI RICERCA -->
-                  <label class="control-label fw-bold mb-2  " for="distance"><span class="brand">Raggio</span> di ricerca: {{distance}} Km</label>
-                  <input type="range" id="distance" name="distance" min="1" max="25" class="form-range" v-model="distance">
-                </div>
-              </div>
-              <div class="my-3 d-flex justify-content-between">
-                <div>
-                  <!-- INPUT MQ -->
-                  <label class="control-label fw-bold mb-2  " for="mq">Numero di <span class="brand">mq</span> minimi </label>
-                  <div class="d-flex justify-content-center">
-                      <input type="number" id="mq" name="mq" min="1" class="form-control" style="width:4.25rem" v-model="mq"><span class="align-self-center fw-bold ms-2"> &#x33A1;</span>
-                  </div>
-                </div>
-                <div>                  
-                  <!-- INPUT STANZE -->
-                  <label class="control-label fw-bold mb-2  " for="rooms">Numero di <span class="brand">stanze</span> minime </label>
-                  <div class="d-flex justify-content-center">
-                      <input type="number" id="rooms" name="rooms" min="1" class="form-control" style="width:4.25rem" v-model="rooms"><i class="fa-solid fa-building ms-2 align-self-center" style="color: #4f5153;"></i>
-                  </div>
-                </div>
-                <div>
-                  <!-- INPUT BAGNI -->
-                  <label class="control-label fw-bold mb-2  " for="wc">Numero di <span class="brand">bagni</span> minimi </label>
-                  <div class="d-flex justify-content-center">
-                      <input type="number" id="wc" name="wc" min="1" class="form-control" style="width:4.25rem" v-model="wc"><i class="fa-solid fa-toilet-paper ms-2 align-self-center" style="color: #4f5153;"></i>
-                  </div>
-                </div>
-                <div>
-                  <!-- INPUT LETTI -->
-                  <label class="control-label fw-bold mb-2  " for="beds">Numero di <span class="brand">posti letto</span> minimi </label>
-                  <div class="d-flex justify-content-center">
-                      <input type="number" id="beds" name="beds" min="1" class="form-control" style="width:4.25rem" v-model="beds"><i class="fa-solid fa-bed ms-2 align-self-center" style="color: #4f5153;"></i>
-                  </div>
-                </div>
-              </div>
-              <!-- INPUT SERVIZI -->
-                <div class="col-12 d-flex my-5 justify-content-between">
-                  <div class="d-flex flex-column" v-for="(service, index) in services" :key="index">
-                    <label class="form-check-label pb-2 position-relative d-flex change-cursor justify-content-center align-items-center align-self-center"  style="width:50px; height:50px;" :id="index" :for="service.id" @click="getService(service.id, index)">
-                        <input class=" m-1" type="checkbox" name="services[]" style=" border:none; background-color:transparent; appearance:none; width:35px; height:35px;" :value='service.id'>
-                        <img :src="service.icons" style="width:50px; height:50px; border: 2px solid transparent;" alt="" class="position-absolute clickable-service" :data-checkbox-id="service.id">
-                    </label>
-                    <span class="text-center">{{service.name}}</span>
-                  </div>
-                </div>
-              </div>
-              <!-- <input type="number" v-model="n_wc_min"> -->
-              <button class="blue-btn btn" @click="getApartments()">
-                Avvia ricerca
-              </button>
-              <h1>{{this.message}}</h1>
+            <div>
+              <!-- INPUT RAGGIO DI RICERCA -->
+              <label class="control-label fw-bold mb-2  " for="distance"><span class="brand">Raggio</span> di ricerca: {{distance}} Km</label>
+              <input type="range" id="distance" name="distance" min="1" max="25" class="form-range" v-model="distance">
             </div>
+          </div>
+          <div class="my-3 d-flex justify-content-between">
+            <div>
+              <!-- INPUT MQ -->
+              <label class="control-label fw-bold mb-2  " for="mq">Numero di <span class="brand">mq</span> minimi </label>
+              <div class="d-flex justify-content-center">
+                  <input type="number" id="mq" name="mq" min="1" class="form-control" style="width:4.25rem" v-model="mq"><span class="align-self-center fw-bold ms-2"> &#x33A1;</span>
+              </div>
+            </div>
+            <div>                  
+              <!-- INPUT STANZE -->
+              <label class="control-label fw-bold mb-2  " for="rooms">Numero di <span class="brand">stanze</span> minime </label>
+              <div class="d-flex justify-content-center">
+                  <input type="number" id="rooms" name="rooms" min="1" class="form-control" style="width:4.25rem" v-model="rooms"><i class="fa-solid fa-building ms-2 align-self-center" style="color: #4f5153;"></i>
+              </div>
+            </div>
+            <div>
+              <!-- INPUT BAGNI -->
+              <label class="control-label fw-bold mb-2  " for="wc">Numero di <span class="brand">bagni</span> minimi </label>
+              <div class="d-flex justify-content-center">
+                  <input type="number" id="wc" name="wc" min="1" class="form-control" style="width:4.25rem" v-model="wc"><i class="fa-solid fa-toilet-paper ms-2 align-self-center" style="color: #4f5153;"></i>
+              </div>
+            </div>
+            <div>
+              <!-- INPUT LETTI -->
+              <label class="control-label fw-bold mb-2  " for="beds">Numero di <span class="brand">posti letto</span> minimi </label>
+              <div class="d-flex justify-content-center">
+                  <input type="number" id="beds" name="beds" min="1" class="form-control" style="width:4.25rem" v-model="beds"><i class="fa-solid fa-bed ms-2 align-self-center" style="color: #4f5153;"></i>
+              </div>
+            </div>
+          </div>
+          <!-- INPUT SERVIZI -->
+            <div class="col-12 d-flex my-5 justify-content-between">
+              <div class="d-flex flex-column" v-for="(service, index) in services" :key="index">
+                <label class="form-check-label pb-2 position-relative d-flex change-cursor justify-content-center align-items-center align-self-center"  style="width:50px; height:50px;" :id="index" :for="service.id" @click="getService(service.id, index)">
+                    <input class=" m-1" type="checkbox" name="services[]" style=" border:none; background-color:transparent; appearance:none; width:35px; height:35px;" :value='service.id'>
+                    <img :src="service.icons" style="width:50px; height:50px; border: 2px solid transparent;" alt="" class="position-absolute clickable-service" :data-checkbox-id="service.id">
+                </label>
+                <span class="text-center">{{service.name}}</span>
+              </div>
+            </div>
+          </div>
+          <!-- <input type="number" v-model="n_wc_min"> -->
+          <button class="blue-btn btn" @click="getApartments()">
+            Avvia ricerca
+          </button>
+          <h1>{{this.message}}</h1>
         </div>
     </div>
   </div>
-    <div class="container-fluid bg-beige py-5 mt-5 ">
-      <div class="container">
-        <div class="row cards-row ">
-          <div class="col-12 col-md-4" v-for="apartment in apartments" :key="apartment.id">
-              <Card :apartment="apartment" />
-          </div>
+  
+  <div class="container-fluid bg-beige py-5 mt-5 ">
+    <div class="container">
+      <div class="row cards-row ">
+        <div class="col-12 col-md-4 my-4" v-for="apartment in apartments" :key="apartment.id">
+            <Card :apartment="apartment" />
         </div>
       </div>
     </div>
-    
+  </div>
+   
 </template>
 
 <style lang="scss">

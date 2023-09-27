@@ -219,7 +219,7 @@ export default {
    <div class="container-fluid bg-beige">
        <div class="container">
            <div class="row">
-               <div class="col-12 col-md-6 col-lg-4 my-5" v-for="apartment in apartments" :key="apartment.id">
+               <div class="col-12 col-md-6 col-lg-4 my-4" v-for="apartment in apartments" :key="apartment.id">
                 <router-link class="text-decoration-none card-container" :to=" { name: 'single-apartment', params: { slug: apartment.slug }}">
                     <Card :apartment="apartment" />
                 </router-link>
