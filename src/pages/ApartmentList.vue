@@ -244,7 +244,7 @@ export default {
           </div>
       </div>
   </div>
-  <div class="container-fluid card-container py-3">
+  <div class="container-fluid  py-3">
     <div class="container">
       <div class="row">
             <div class="col-12">
@@ -315,16 +315,13 @@ export default {
             </div>
         </div>
     </div>
-    <div class="container mt-5">
-      <div class="row justify-content-start my-5">
-        
-      </div>
-      <div class="row cards-row">
-        <div class="col-12 col-md-4" v-for="apartment in apartments" :key="apartment.id">
-            <div>
-              {{apartment.lon}} {{apartment.lat}} {{apartment.address}}
-            </div>
-            <Card :apartment="apartment" />
+  </div>
+    <div class="container-fluid bg-beige py-5 mt-5 ">
+      <div class="container">
+        <div class="row cards-row ">
+          <div class="col-12 col-md-4" v-for="apartment in apartments" :key="apartment.id">
+              <Card :apartment="apartment" />
+          </div>
         </div>
       </div>
     </div>

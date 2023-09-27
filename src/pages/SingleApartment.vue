@@ -177,7 +177,7 @@ export default {
         <div class="container-fluid">
             <div class="row ">
                 <div class="col-8 offset-2 text-center mb-5">
-                    <h2 class="my-3"><span class="brand">Dettagli</span> dell'Annuncio</h2>
+                    <h2 class="my-3"><span class="brand">Dettagli</span></h2>
                     <p class="text-center">Scopri tutti i dettagli di questa straordinaria opportunità. Prenditi il tempo per esaminare attentamente ogni aspetto e assicurarti che questo sia il luogo perfetto per il tuo prossimo soggiorno. Se vuoi rendere la tua esperienza ancora più completa, dai un'occhiata alle foto aggiuntive caricate dagli host. Ricorda che ogni annuncio è unico, quindi non esitare a chiedere all'host qualsiasi domanda tu possa avere. Siamo qui per aiutarti a trovare l'alloggio ideale su <span class="brand">BoolBnB</span>. Buona esplorazione!</p>
                 </div>
                 <div class="container-fluid bg-beige py-3 ">
@@ -209,7 +209,7 @@ export default {
         <div class="container my-5">
             <div class="row">
                 <div class="col-12 col-md-6 flex-column d-flex align-items-center d-md-block  col-lg-3 my-4 my-lg-0 text-lg-start">
-                    <h5 class="mb-3 d-flex ">Il Tuo <span class="brand">Alloggio</span></h5>
+                    <h5 class="mb-3 d-flex "><span class="brand">Alloggio</span></h5>
                         <ul class="list-unstyled ">
                             <li class=" ">
                                  <img :src="apartment.type.icons"  class="me-2 type-icon" alt="">  
@@ -219,19 +219,19 @@ export default {
                                 <span class="" ><span class="brand">Grandezza</span> alloggio: </span><span class="fw-bold " >{{apartment.mq}} <span class="fs-5">&#x33A1;</span> </span>
                             </li>
                             <li class="">
-                                <span class="">Numero di <span class="brand">Stanze:</span> </span> <span class="mx-2 fw-bold ">{{apartment.n_rooms}}<img src="../assets/icons8-posto-letto-occupato-24.png" class="ms-1" alt=""></span>
+                                <span class="">Numero di <span class="brand">Stanze:</span> </span> <span class="mx-2 fw-bold ">{{apartment.n_rooms}}<i class="fa-solid fa-building ms-2 align-self-center" style="color: #4f5153;"></i></span>
                             </li>
                             <li class="">
-                                <span class="">Numero di <span class="brand">Bagni:</span> </span> <span class="ms-2 fw-bold ">{{apartment.n_wc}}<img src="../assets/icons8-carta-igienica-24.png" class="ms-1" alt=""></span>
+                                <span class="">Numero di <span class="brand">Bagni:</span> </span> <span class="ms-2 fw-bold ">{{apartment.n_wc}}<i class="fa-solid fa-toilet-paper ms-2" style="color: #4f5153;"></i></span>
                             </li>
                             <li class="">
-                                <span class="">Numero di <span class="brand">Letti:</span> </span> <span class="ms-2 fw-bold ">{{apartment.n_beds}}<img src="../assets/icons8-carta-igienica-24.png" class="ms-1" alt=""></span>
+                                <span class="">Numero di <span class="brand">Letti:</span> </span> <span class="ms-2 fw-bold ">{{apartment.n_beds}}<i class="fa-solid fa-bed ms-2 align-self-center" style="color: #4f5153;"></i></span>
                             </li>
                         </ul>
                     
                 </div>
                 <div class="col-12 col-md-6 flex-column d-flex align-items-center d-md-block  col-lg-3 my-4 my-lg-0 text-lg-start">
-                    <h5 class="mb-3">I <span class="brand">Servizi</span> che Offri</h5>
+                    <h5 class="mb-3">I <span class="brand">Servizi</span></h5>
                     <ul class="list-unstyled apartment-list " v-for="service in apartment.services" :key="service.id" >
                         <li class="">
                            <img :src="service.icons" alt="" class="type-icon me-2"> 
@@ -240,14 +240,14 @@ export default {
                     </ul>
                 </div>
                 <div class="col-12  col-lg-6 text-center my-4 my-lg-0 text-md-start">
-                    <h5 class="mb-3">Il <span class="brand">Pernottamento</span> che Offri</h5>
+                    <h5 class="mb-3">Il <span class="brand">Pernottamento</span></h5>
                    
                         <ul class="list-unstyled apartment-list ">
                             <li class="">
                                <span><span class="brand">Prezzo</span> per Notte: </span><span class="ms-2 fw-bold">{{apartment.price}}&euro;</span>
                             </li>
                             <li class="">
-                               <span><span class="brand">Indirizzo</span>: </span><span class="ms-2 ">{{apartment.address}} <img src="../assets/icons8-codice-regione-25.png" class="ms-1" alt=""></span>
+                               <span><span class="brand">Indirizzo</span>: </span><span class="ms-2 ">{{apartment.address}} <i class="fa-solid fa-location-dot ms-1" style="color: #4f5153;"></i></span>
                             </li>
                             <li class="">
                                 <span><span class="brand">Descrizione</span>: </span><span class="ms-2 w-break">{{apartment.description}}  </span>
