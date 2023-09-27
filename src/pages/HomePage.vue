@@ -213,11 +213,11 @@ export default {
             </div>
         </div>
     </div>
-   <div class="container-fluid card-container">
+   <div class="container-fluid bg-beige">
        <div class="container">
            <div class="row">
                <div class="col-12 col-md-6 col-lg-4 my-5" v-for="apartment in apartments" :key="apartment.id">
-                <router-link class="text-decoration-none" :to=" { name: 'single-apartment', params: { slug: apartment.slug }}">
+                <router-link class="text-decoration-none card-container" :to=" { name: 'single-apartment', params: { slug: apartment.slug }}">
                     <Card :apartment="apartment" />
                 </router-link>
                </div>
@@ -270,8 +270,5 @@ export default {
     }
 }
 
-.card-container {
-    background-color: #f7ecd1;
-    margin: 5rem 0;
-}
+
 </style>
