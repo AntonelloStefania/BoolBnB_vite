@@ -20,8 +20,8 @@ export default {
       rooms: '',
       beds: '',
       suggestions: [],
-      suggestionLon: '',
-      suggestionLat: '',
+      suggestionLon: this.$route.query.homeSuggestionLon ? Number(this.$route.query.homeSuggestionLon) : '',
+      suggestionLat: this.$route.query.homeSuggestionLat ? Number(this.$route.query.homeSuggestionLat) : '',
       bbox: [],
       distance: 20,
       message: '',
@@ -38,13 +38,11 @@ export default {
   methods: {
     getApartments() {
       this.message= '';
+      this.$router.push({query: {}});
       if(this.address === ''){
         this.suggestionLat = '';
         this.suggestionLon = '';
-      }
-      if(this.$route.query.homeAddress !== ""){
-        this.suggestionLat = Number(this.$route.query.homeSuggestionLat);
-        this.suggestionLon = Number(this.$route.query.homeSuggestionLon);
+        this.bbox = [];
       }
       if (this.address !== '' || this.wc != '' || this.rooms != '' || this.mq != '' || this.beds != '' || this.checkboxServices != '') {
         this.filteredApartments();
@@ -77,17 +75,19 @@ export default {
 
     filteredApartments() {
       
-      if(this.suggestionLat !== ''){
-        // Calcola il bounding box intorno al punto inserito
-        this.bbox = [
-          this.suggestionLon - (this.distance / 111.32), // Longitudine minima
-          this.suggestionLat - (this.distance / 111.32),  // Latitudine minima
-          this.suggestionLon + (this.distance / (111.32 * Math.cos(this.suggestionLat * (Math.PI / 180)))), // Longitudine massima
-          this.suggestionLat + (this.distance / 111.32), // Latitudine massima
-        ];
+      if (this.suggestionLat !== '' && !isNaN(this.suggestionLat) && this.suggestionLon !== '' && !isNaN(this.suggestionLon)) {
+          // Calcola il bounding box intorno al punto inserito
+          this.bbox = [
+            this.suggestionLon - (this.distance / 111.32), // Longitudine minima
+            this.suggestionLat - (this.distance / 111.32),  // Latitudine minima
+            this.suggestionLon + (this.distance / (111.32 * Math.cos(this.suggestionLat * (Math.PI / 180)))), // Longitudine massima
+            this.suggestionLat + (this.distance / 111.32), // Latitudine massima
+          ];
       }
 
       const params = {};
+
+      let query = {};
 
       if (this.bbox !== '') {
         params.min_lat = this.bbox[1];
@@ -95,21 +95,31 @@ export default {
         params.max_lat = this.bbox[3];
         params.max_lon = this.bbox[2];
       };
+      if(this.address !== ''){
+        query = Object.assign(query, { 'address': this.address });
+        query = Object.assign(query, { 'distance': this.distance });
+      }
       if(this.wc !== ''){
         params.wc = this.wc;
+        query = Object.assign(query, { 'wc': this.wc });
       };
       if(this.rooms !== ''){
         params.rooms = this.rooms;
+        query = Object.assign(query, { 'rooms': this.rooms });
       };
       if(this.mq !== ''){
         params.mq = this.mq;
+        query = Object.assign(query, { 'mq': this.mq });
       };
       if(this.beds !== ''){
         params.beds = this.beds;
+        query = Object.assign(query, { 'beds': this.beds });
       };
       if(this.checkboxServices !== ''){
         params.services = this.checkboxServices;
+        query = Object.assign(query, { 'services': this.checkboxServices });
       };
+      this.$router.push({query: query});
 
       const urladdress = `http://127.0.0.1:8000/api/all-filtered-apartments`
       axios.get(urladdress, { params })
