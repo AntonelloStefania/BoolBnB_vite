@@ -25,6 +25,7 @@ export default {
       bbox: [],
       distance: 20,
       message: '',
+      checkboxServices: [],
       services: [],
     }
   },
@@ -45,7 +46,7 @@ export default {
         this.suggestionLat = Number(this.$route.query.homeSuggestionLat);
         this.suggestionLon = Number(this.$route.query.homeSuggestionLon);
       }
-      if (this.address !== '' || this.wc != '' || this.rooms != '' || this.mq != '' || this.beds != '') {
+      if (this.address !== '' || this.wc != '' || this.rooms != '' || this.mq != '' || this.beds != '' || this.checkboxServices != '') {
         this.filteredApartments();
         this.$route.query.homeAddress = '';
       } else{
@@ -105,6 +106,9 @@ export default {
       };
       if(this.beds !== ''){
         params.beds = this.beds;
+      };
+      if(this.checkboxServices !== ''){
+        params.services = this.checkboxServices;
       };
 
       const urladdress = `http://127.0.0.1:8000/api/all-filtered-apartments`
@@ -203,50 +207,23 @@ export default {
       console.log('sono qui')
       this.suggestionLat = data.position.lat;
       this.suggestionLon = data.position.lon;
-    }
+    },
+    getService(serviceId, index){
+      console.log(serviceId)
+      let label = document.getElementById(index);
+      console.log(label)
+      if(label.classList.contains('checkbox-bg')){
+        label.classList.remove('checkbox-bg')
+        let indexOfService = this.checkboxServices.indexOf(serviceId)
+        this.checkboxServices.splice(indexOfService, 1)
+      } else {
+        label.classList.add('checkbox-bg')
+        this.checkboxServices.push(serviceId)
+      }
+      console.log(this.checkboxServices);
+    },
   }
 }
-//SELEZIONE SERVIZI IN EDIT (CHECKBOX)
-
-
-  const clickableServices = document.querySelectorAll('.clickable-service');
-
-  clickableServices.forEach(function (clickableService) {
-    // Trova l'ID della checkbox associata all'immagine
-    const checkboxId = clickableService.getAttribute('data-checkbox-id');
-
-    // Trova la checkbox corrispondente
-    const checkbox = document.getElementById(checkboxId);
-
-    // Controlla se la checkbox è selezionata inizialmente
-    if (checkbox && checkbox.checked) {
-      clickableService.style.backgroundColor = '#C0C9E1';
-      clickableService.style.borderRadius = '0.5rem'
-    }
-
-    clickableService.addEventListener('click', function () {
-      // Trova nuovamente la checkbox
-      const checkbox = document.getElementById(checkboxId);
-
-      if (checkbox) {
-        // Cambia lo stato della checkbox
-        checkbox.checked = !checkbox.checked;
-
-        // Simula il cambiamento dell'aspetto della checkbox
-        if (checkbox.checked) {
-          clickableService.style.backgroundColor = '#C0C9E1';
-          clickableService.style.borderRadius = '0.5rem'
-        } else {
-          clickableService.style.backgroundColor = 'transparent';
-        }
-      }
-    });
-
-    // Impedisci al clic sull'immagine di attivare la checkbox direttamente
-    clickableService.addEventListener('click', function (e) {
-      e.preventDefault();
-    });
-  });
 </script>
 
 <template lang="">
@@ -312,8 +289,8 @@ export default {
               <!-- INPUT SERVIZI -->
                 <div class="col-12 d-flex my-5 justify-content-between">
                   <div class="d-flex flex-column" v-for="(service, index) in services" :key="index">
-                    <label class="form-check-label pb-2 position-relative d-flex change-cursor justify-content-center align-items-center align-self-center"  style="width:50px; height:50px;" :for="service.id">
-                        <input class="form-check-input m-1" type="checkbox" name="services[]" style=" border:none; background-color:transparent; width:35px; height:35px;" :value='service.id' :id="service.id">
+                    <label class="form-check-label pb-2 position-relative d-flex change-cursor justify-content-center align-items-center align-self-center"  style="width:50px; height:50px;" :id="index" :for="service.id" @click="getService(service.id, index)">
+                        <input class=" m-1" type="checkbox" name="services[]" style=" border:none; background-color:transparent; appearance:none; width:35px; height:35px;" :value='service.id'>
                         <img :src="service.icons" style="width:50px; height:50px; border: 2px solid transparent;" alt="" class="position-absolute clickable-service" :data-checkbox-id="service.id">
                     </label>
                     <span class="text-center">{{service.name}}</span>
@@ -348,5 +325,9 @@ export default {
 .card-container {
     background-color: #f7ecd1;
     margin: 0;
+}
+.checkbox-bg {
+  background-color: #C0C9E1;
+  border-radius: 0.5rem;
 }
 </style>
