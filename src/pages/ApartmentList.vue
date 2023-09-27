@@ -248,57 +248,83 @@ export default {
     <div class="container">
       <div class="row">
         <div class="col-12">
-            <h1 class="text-center text-primary mb-3">BnB - APARTMENTS</h1>
+          <div class="col-12 text-center mb-5">
+              <h2 class="text-center mb-3"><span class="brand">Personalizza</span> la tua Ricerca</h2>
+              <p>
+                Trova l'opzione perfetta per te! Utilizza i <span class="brand">Filtri di Ricerca</span> qui sotto per adattare la tua ricerca alle tue esigenze. <span class="brand">Scegli</span> tra una vasta gamma di opzioni e trova ciò che stai cercando in modo rapido e semplice.
+              </p>
+          </div>
+          <div class="col-12 text-center d-flex flex-column flex-lg-row">
+            <div class=" col-12 col-lg-8 pt-4">
+              
+                <!-- INPUT INDIRIZZO -->
+                <div class="col-10 offset-1 col-md-6 col-lg-4 offset-lg-4 offset-md-3 text-center">
+                  <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+                      <div class="input-group">
+                          <input type="search" list="suggestions" placeholder="indirizzo..." name="address" id="address" @input="getSuggetions()" v-model="address" aria-describedby="button-addon1" class="form-control border-0 bg-light">
+                          <datalist id="suggestions">
+                              <option v-for="suggestion in suggestions" :value="suggestion.address.freeformAddress">{{suggestion.address.freeformAddress}}</option>
+                          </datalist>
+                          
+                      </div>
+                  </div>
+                
+              
+                  <!-- <label class="control-label fw-bold mb-2  " for="address"><span class="brand">Indirizzo</span></label>
+                  <input type="text" list="suggestions" id="address" name="address" class="form-control" @input="getSuggetions()" v-model="address"> 
+                  <datalist id="suggestions">
+                    <option v-for="suggestion in suggestions" :value="suggestion.address.freeformAddress">{{suggestion.address.freeformAddress}}</option>
+                  </datalist>                                  -->
+              </div>
+              <div class="col-10 offset-1 col-md-6 col-lg-4 offset-lg-4 offset-md-3 text-center">
+                <!-- INPUT RAGGIO DI RICERCA -->
+                <label class="control-label fw-bold mb-2  " for="distance"><span class="brand">Raggio</span> di ricerca: {{distance}} Km</label>
+                <input type="range" id="distance" name="distance" min="1" max="25" class="form-range" v-model="distance">
+              </div>
+            </div>
+            <div class="col-12 col-lg-4">
+
+              <div class="my-3 d-flex ">
+                <div class="col-6">
+                  <div>
+                    <!-- INPUT MQ -->
+                    <label class="control-label fw-bold mb-2  " for="mq"><span class="brand">mq</span> minimi </label>
+                    <div class="d-flex justify-content-center">
+                        <input type="number" id="mq" name="mq" min="1" class="form-control border-0 bg-light" style="width:4.25rem" v-model="mq"><span class="align-self-center fw-bold ms-2"> &#x33A1;</span>
+                    </div>
+                  </div>
+                  <div>                  
+                    <!-- INPUT STANZE -->
+                    <label class="control-label fw-bold mb-2  " for="rooms"><span class="brand">stanze</span> minime </label>
+                    <div class="d-flex justify-content-center">
+                        <input type="number" id="rooms" name="rooms" min="1" class="form-control border-0 bg-light" style="width:4.25rem" v-model="rooms"><i class="fa-solid fa-building ms-2 align-self-center" style="color: #4f5153;"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+
+                  <div>
+                    <!-- INPUT BAGNI -->
+                    <label class="control-label fw-bold mb-2  " for="wc"><span class="brand">bagni</span> minimi </label>
+                    <div class="d-flex justify-content-center">
+                        <input type="number" id="wc" name="wc" min="1" class="form-control border-0 bg-light" style="width:4.25rem" v-model="wc"><i class="fa-solid fa-toilet-paper ms-2 align-self-center" style="color: #4f5153;"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <!-- INPUT LETTI -->
+                    <label class="control-label fw-bold mb-2  " for="beds"><span class="brand">letti</span> minimi </label>
+                    <div class="d-flex justify-content-center">
+                        <input type="number" id="beds" name="beds" min="1" class="form-control border-0 bg-light" style="width:4.25rem" v-model="beds"><i class="fa-solid fa-bed ms-2 align-self-center" style="color: #4f5153;"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>  
+          </div>
         </div>
-        <div class="col-12 text-center">
-          <div class="d-flex justify-content-around">
-            <div>
-              <!-- INPUT INDIRIZZO -->
-              <label class="control-label fw-bold mb-2  " for="address"><span class="brand">Indirizzo</span></label>
-              <input type="text" list="suggestions" id="address" name="address" class="form-control" @input="getSuggetions()" v-model="address"> 
-              <datalist id="suggestions">
-                <option v-for="suggestion in suggestions" :value="suggestion.address.freeformAddress">{{suggestion.address.freeformAddress}}</option>
-              </datalist>                                 
-            </div>
-            <div>
-              <!-- INPUT RAGGIO DI RICERCA -->
-              <label class="control-label fw-bold mb-2  " for="distance"><span class="brand">Raggio</span> di ricerca: {{distance}} Km</label>
-              <input type="range" id="distance" name="distance" min="1" max="25" class="form-range" v-model="distance">
-            </div>
-          </div>
-          <div class="my-3 d-flex justify-content-between">
-            <div>
-              <!-- INPUT MQ -->
-              <label class="control-label fw-bold mb-2  " for="mq">Numero di <span class="brand">mq</span> minimi </label>
-              <div class="d-flex justify-content-center">
-                  <input type="number" id="mq" name="mq" min="1" class="form-control" style="width:4.25rem" v-model="mq"><span class="align-self-center fw-bold ms-2"> &#x33A1;</span>
-              </div>
-            </div>
-            <div>                  
-              <!-- INPUT STANZE -->
-              <label class="control-label fw-bold mb-2  " for="rooms">Numero di <span class="brand">stanze</span> minime </label>
-              <div class="d-flex justify-content-center">
-                  <input type="number" id="rooms" name="rooms" min="1" class="form-control" style="width:4.25rem" v-model="rooms"><i class="fa-solid fa-building ms-2 align-self-center" style="color: #4f5153;"></i>
-              </div>
-            </div>
-            <div>
-              <!-- INPUT BAGNI -->
-              <label class="control-label fw-bold mb-2  " for="wc">Numero di <span class="brand">bagni</span> minimi </label>
-              <div class="d-flex justify-content-center">
-                  <input type="number" id="wc" name="wc" min="1" class="form-control" style="width:4.25rem" v-model="wc"><i class="fa-solid fa-toilet-paper ms-2 align-self-center" style="color: #4f5153;"></i>
-              </div>
-            </div>
-            <div>
-              <!-- INPUT LETTI -->
-              <label class="control-label fw-bold mb-2  " for="beds">Numero di <span class="brand">posti letto</span> minimi </label>
-              <div class="d-flex justify-content-center">
-                  <input type="number" id="beds" name="beds" min="1" class="form-control" style="width:4.25rem" v-model="beds"><i class="fa-solid fa-bed ms-2 align-self-center" style="color: #4f5153;"></i>
-              </div>
-            </div>
-          </div>
           <!-- INPUT SERVIZI -->
-            <div class="col-12 d-flex my-5 justify-content-between">
-              <div class="d-flex flex-column" v-for="(service, index) in services" :key="index">
+          <div class="col-12  d-flex flex-wrap my-5 justify-content-between">
+              <div class="d-flex flex-column col-4 col-lg-1 mb-3 mb-lg-0" v-for="(service, index) in services" :key="index">
                 <label class="form-check-label pb-2 position-relative d-flex change-cursor justify-content-center align-items-center align-self-center"  style="width:50px; height:50px;" :id="index" :for="service.id" @click="getService(service.id, index)">
                     <input class=" m-1" type="checkbox" name="services[]" style=" border:none; background-color:transparent; appearance:none; width:35px; height:35px;" :value='service.id'>
                     <img :src="service.icons" style="width:50px; height:50px; border: 2px solid transparent;" alt="" class="position-absolute clickable-service" :data-checkbox-id="service.id">
@@ -306,8 +332,10 @@ export default {
                 <span class="text-center">{{service.name}}</span>
               </div>
             </div>
-          </div>
+      
           <!-- <input type="number" v-model="n_wc_min"> -->
+        </div>
+        <div class="col-12 text-center">
           <button class="blue-btn btn" @click="getApartments()">
             Avvia ricerca
           </button>
@@ -319,7 +347,7 @@ export default {
   <div class="container-fluid bg-beige py-5 mt-5 ">
     <div class="container">
       <div class="row cards-row ">
-        <div class="col-12 col-md-4 my-4" v-for="apartment in apartments" :key="apartment.id">
+        <div class="col-12 col-md-6 col-lg-4 my-4 card-container" v-for="apartment in apartments" :key="apartment.id">
             <Card :apartment="apartment" />
         </div>
       </div>
@@ -330,8 +358,8 @@ export default {
 
 <style lang="scss">
 .card-container {
-    background-color: #f7ecd1;
-    margin: 0;
+    
+    cursor: pointer;
 }
 .checkbox-bg {
   background-color: #C0C9E1;

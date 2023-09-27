@@ -47,9 +47,17 @@ export default {
                   <ul class="list-unstyled  my-0">
                     <li class="mb-2 fs"><span class="brand">Letti</span>: {{apartment.n_beds}}<i class="fa-solid fa-bed ms-2 align-self-center" style="color: #4f5153;"></i></li>
                     <li class="fs"><span class="brand">Bagni</span>: {{apartment.n_wc}}<i class="fa-solid fa-toilet-paper ms-2" style="color: #4f5153;"></i></li>
-                    <li>{{apartment.sponsors[0].name}}</li>
                   </ul>
                 </div>
+              </div>
+              <div class="col-12 d-flex flex-wrap justify-content-center my-4">
+                <div class="col-auto text-center my-2" style="width:3rem" v-for="service in apartment.services">
+                 
+                    <img class="type-icon" :src="service.icons"  alt="">
+                  
+
+                </div>
+
               </div>
             </div>
             
@@ -60,13 +68,13 @@ export default {
 <style lang="scss">
 .card-h {
  
-
+height: 780px;
   .title {
     height: 58px;
     overflow: hidden;
   }
 
-  img {
+  .card-img-top {
     height: 400px;
     object-fit: cover;
   }
@@ -93,5 +101,8 @@ export default {
 .fs-m{
   font-size: 17px;
 }
-
+.type-icon {
+    width: 2rem;
+    object-fit: cover;
+}
 </style>
