@@ -71,27 +71,6 @@ export default {
                     }
 
                     this.errors = {}
-                    console.log(data)
-                    const urlMessage = `http://127.0.0.1:8000/api/messages`
-                    axios.post(urlMessage, data)
-                        .then(resp => {
-                            console.log(resp)
-                            this.success = resp.data.success
-                            if (this.success) {
-                                this.name = ""
-                                this.surname = ""
-                                this.email = ""
-                                this.message = ""
-                                this.errors = ""
-                                this.messageForm = "Form inviato sul cesso"
-                                this.$router.push({ name: 'thank-you' })
-                            } else {
-                                this.errors = resp.data.errors;
-                            }
-
-                            this.loading = false
-
-                        })
                 });
 
             //SECONDA PROVA FUNZIONAAAAAAAAAAA
