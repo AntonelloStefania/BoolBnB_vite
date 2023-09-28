@@ -25,10 +25,22 @@ export default {
             apartment_id: '',
             messageForm: '',
             loading: false,
+            userIp: null,
         }
+    },mounted() {
+        axios.get('https://api.ipify.org?format=json')
+        .then(response => {
+        this.userIp = response.data.ip;
+        console.log(this.userIp);
+    })
+    .catch(error => {
+      console.error('Errore durante il recupero dell\'indirizzo IP:', error);
+    });
     },
     created() {
         this.getSingleApartment();
+   
+ 
     },
     methods: {
         getSingleApartment() {

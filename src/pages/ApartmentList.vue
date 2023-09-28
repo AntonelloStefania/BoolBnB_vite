@@ -34,6 +34,8 @@ export default {
   mounted() {
     this.getApartments();
     this.getServices();
+    
+    
   },
   methods: {
     getApartments() {
