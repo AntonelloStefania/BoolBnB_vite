@@ -21,10 +21,11 @@ export default {
             bbox: [],
             distance: 20,
             message: '',
+           
         }
     },
     mounted() {
-        this.getApartments();
+      this.getApartments();
     },
     methods: {
         getApartments() {
