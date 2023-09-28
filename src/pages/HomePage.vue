@@ -212,24 +212,27 @@ export default {
               
         
     </div>
-    <div class="row">
-        <div class="col-12 mt-5 mb-4">
-            <div class="col-12 text-center">
-                <h2 class="mb-3"> <span class="brand">Cerca</span> il tuo <span class="brand">Alloggio</span> dei Sogni</h2>
-            </div>
-            <div class="col-10 offset-1 col-md-6 col-lg-4 offset-lg-4 offset-md-3 text-center">
-                <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
-                    <div class="input-group">
-                        <input type="search" list="suggestions" placeholder="indirizzo..." name="address" id="address" @input="getSuggetions()" v-model="address" aria-describedby="button-addon1" class="form-control border-0 bg-light">
-                        <datalist id="suggestions">
-                            <option v-for="suggestion in suggestions" :value="suggestion.address.freeformAddress">{{suggestion.address.freeformAddress}}</option>
-                        </datalist>
-                        <div class="input-group-append">
-                            <router-link id="button-addon1" :to="{ name: 'apartments', query: { homeAddress: this.address, homeSuggestionLat: this.suggestionLat, homeSuggestionLon: this.suggestionLon}}"  class="btn btn-link text-primary"><i class="fa fa-search"></i></router-link>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-12 mt-5 mb-4">
+                <div class="col-12 text-center">
+                    <h2 class="mb-3"> <span class="brand">Cerca</span> il tuo <span class="brand">Alloggio</span> dei Sogni</h2>
+                </div>
+                <div class="col-10 offset-1 col-md-6 col-lg-4 offset-lg-4 offset-md-3 text-center">
+                    <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+                        <div class="input-group">
+                            <input type="search" list="suggestions" placeholder="indirizzo..." name="address" id="address" @input="getSuggetions()" v-model="address" aria-describedby="button-addon1" class="form-control border-0 bg-light">
+                            <datalist id="suggestions">
+                                <option v-for="suggestion in suggestions" :value="suggestion.address.freeformAddress">{{suggestion.address.freeformAddress}}</option>
+                            </datalist>
+                            <div class="input-group-append">
+                                <router-link id="button-addon1" :to="{ name: 'apartments', query: { homeAddress: this.address, homeSuggestionLat: this.suggestionLat, homeSuggestionLon: this.suggestionLon}}"  class="btn btn-link text-primary"><i class="fa fa-search"></i></router-link>
+                            </div>
                         </div>
                     </div>
+                    <h1>{{this.message}}</h1>
                 </div>
-                <h1>{{this.message}}</h1>
             </div>
         </div>
     </div>
