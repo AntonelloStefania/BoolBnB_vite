@@ -27,15 +27,35 @@ export default {
             loading: false,
             userIp: null,
         }
-    },mounted() {
+    },
+    mounted() {
         axios.get('https://api.ipify.org?format=json')
         .then(response => {
-        this.userIp = response.data.ip;
-        console.log(this.userIp);
-    })
-    .catch(error => {
-      console.error('Errore durante il recupero dell\'indirizzo IP:', error);
-    });
+            this.userIp = response.data.ip;
+
+            const params= {
+                'ip': this.userIp,
+                'apartment_id': this.apartment.id,
+            };
+
+            console.log(this.userIp);
+            const urladdress = `http://127.0.0.1:8000/api/visits`
+            axios.get(urladdress, { params })
+            .then(resp => {
+                this.success = resp.data.success
+                if (this.success) {
+                    console.log("Ce l'abbiamo fatta Beppe!!!")
+                } else {
+                    this.errors = resp.data.errors;
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            })
+        })
+        .catch(error => {
+        console.error('Errore durante il recupero dell\'indirizzo IP:', error);
+        });
     },
     created() {
         this.getSingleApartment();
