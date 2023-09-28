@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 import axios from 'axios';
 
 export default {
@@ -71,4 +71,4 @@ export default {
 
 <style lang="">
   
-</style>
+</style> -->

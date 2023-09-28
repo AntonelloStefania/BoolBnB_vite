@@ -19,7 +19,14 @@ export default {
 
 <template lang="">
         <div class="card shadow-sm border-0 rounded ">
-          <div class="card-body card-h p-0"><img :src="`${store.baseUrl}/storage/${apartment.cover}`" alt="" class="w-100 card-img-top">
+          <div class="card-body card-h p-0">
+            <div class="card-image-container-relative">
+              <img :src="`${store.baseUrl}/storage/${apartment.cover}`" alt="" class="w-100 card-img-top">
+              <!-- <span class="sponsor-label-absolute" v-if=" apartment.lastSponsorId > 1"> In Evidenza</span> -->
+              <div v-for="sponsor in apartment.sponsors">
+                <span class="sponsor-label-absolute" v-if=" new Date(sponsor.pivot.end) > new Date()"> In Evidenza</span>
+              </div>
+            </div>
             <div class="top-text-wrapper py-3">
               <div class="px-4">
                 <h5 class="mb-2 title">{{apartment.title}}</h5>
@@ -105,5 +112,21 @@ height: 780px;
 .type-icon {
     width: 2rem;
     object-fit: cover;
+}
+
+
+.card-image-container-relative{
+  position:relative;
+}
+
+.sponsor-label-absolute{
+  position:absolute;
+  right:20px;
+  bottom:-10px;
+  background-color: pink;
+  padding:5px 10px;
+  border-radius:0.755rem;
+  font-weight: bold;
+  color: rgb(36, 36, 90);
 }
 </style>

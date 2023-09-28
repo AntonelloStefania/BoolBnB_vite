@@ -247,10 +247,20 @@ export default {
            </div>
        </div>
    </div>
-   <div class="container-fluid">
+   <div class="container">
       <div class="row">
-        <div class="col-12">
-          <AppMap/>
+        <div class="col-12 text-center mt-4">
+            <h2><span class="brand">Esplora</span> le Meraviglie di <span class="brand">BoolBnB</span> sulla Mappa</h2>
+        </div>
+        <div class="col-12 d-flex flex-column flex-lg-row  my-5">
+            <div class="col-12 col-lg-6 d-flex align-items-center pe-5 text-center">
+                <p>
+                    Dai un'occhiata alle straordinarie proprietà disponibili su <span class="brand">BoolBnB</span> sulla nostra mappa interattiva. <span class="brand">BoolBnB</span>  ti offre una vasta gamma di alloggi eccezionali, perfetti per rendere il tuo soggiorno indimenticabile. Sia che tu stia cercando un'accogliente casa vacanze, un lussuoso appartamento o una romantica baita di montagna, puoi trovarli tutti qui. Esplora la mappa, scopri le posizioni esatte e prenota il tuo alloggio dei sogni su <span class="brand">BoolBnB</span>  oggi stesso!
+                </p>
+            </div>
+            <div class="col-12 col-lg-6 ">
+                <AppMap/>
+            </div>
         </div>
 
       </div>
