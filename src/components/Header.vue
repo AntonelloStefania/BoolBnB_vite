@@ -38,13 +38,19 @@ export default {
                         <li class="nav-item" v-for="(item,index) in menuItems" :key="index">
                             <router-link class="nav-link" :to="{ name: item.routeName}" >{{ item.label}}</router-link>
                         </li>
+                        <li  class="mt-2 d-inline d-md-none">
+                            <a href="http://127.0.0.1:8000" class="home-text " style="text-decoration:none" >Zona Host</a>
+                        </li>
+                        <li class="mt-3  d-inline d-md-none">
+                             <a href="http://127.0.0.1:8000/login" class="home-text"  style="text-decoration:none">Login</a>
+                        </li>
                     </ul>
                 </div>
-                <div class="d-flex">
-                        <div class="me-4">
+                <div class="d-md-flex d-none ">
+                        <div class="me-4 ">
                             <a href="http://127.0.0.1:8000" class="pink-btn" >Zona Host</a>
                         </div>
-                        <div class="d-none d-lg-inline">
+                        <div class=" ">
                            <span>oppure effettua il</span> <a href="http://127.0.0.1:8000/login" class="login-btn">Login</a>
                         </div>
                     </div>

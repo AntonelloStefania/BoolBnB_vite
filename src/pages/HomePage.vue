@@ -151,8 +151,7 @@ export default {
 <template lang="">
     <div class="container-fluid navbar-container">
         <div class="row justify-content-end w-100">
-            <div class="col-3 col-lg-2 py-3 ">
-                <router-link :to="{name: 'apartments'}"  class="fw-bold" style="text-decoration:none; color:#3a537e;">Ricerca Avanzata <i class="fa-regular fa-circle-right" style="color: #3a537e;"></i> </router-link>
+            <div class="col-3 col-lg-2 py-4 ">
             </div>
         </div>
     </div>

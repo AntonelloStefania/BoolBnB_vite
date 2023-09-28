@@ -241,9 +241,19 @@ export default {
 <template lang="">
   <div class="container-fluid navbar-container">
       <div class="row  w-100">
-          <div class="col-4 col-lg-2 py-3 d-flex justify-content-end">
-              <router-link :to="{name: 'home'}"  class="fw-bold" style="text-decoration:none; color:#3a537e;"><i class="fa-regular fa-circle-left" style="color: #3a537e;"></i> Annunci in Evidenza  </router-link>
-          </div>
+          <div class="d-flex col-6 justify-content-center">
+            
+            <div class="col-12   py-3 d-flex  justify-content-center">
+                <router-link :to="{name: 'home'}"  class=" d-flex align-items-center fw-bold " style="text-decoration:none; color:#3a537e;">
+                    <div class="col-auto">
+                        <i class="fa-regular fa-circle-left me-2" style="color: #3a537e;"></i> 
+                    </div>
+                    <div class="col">
+                        <span>In Evidenza</span>  
+                    </div>
+                </router-link>
+            </div>
+        </div>
       </div>
   </div>
   <div class="container-fluid  py-3">
@@ -341,12 +351,14 @@ export default {
           <button class="blue-btn btn" @click="getApartments()">
             Avvia ricerca
           </button>
-          <h1>{{this.message}}</h1>
+          <div v-if="this.message" class="col-12 text-center my-5 p-5 bg-beige">
+            <h5 class="home-text fw-bold">{{this.message}}</h5>
+          </div>
         </div>
     </div>
   </div>
   
-  <div class="container-fluid bg-beige py-5 mt-5 ">
+  <div v-if="!this.message" class="container-fluid bg-beige py-5 mt-5 ">
     <div class="container">
       <div class="row cards-row ">
         <div class="col-12 col-md-6 col-lg-4 my-4 card-container" v-for="apartment in apartments" :key="apartment.id">
