@@ -3,10 +3,12 @@ import axios from 'axios';
 import { store } from '../store.js';
 import Card from '../components/Card.vue';
 import AppMap from '../components/AppMap.vue';
+import AppLoader from '../components/AppLoader.vue';
 
 export default {
     name: 'HomePage',
     components: {
+        AppLoader,
         Card,
         AppMap,
     },
@@ -21,7 +23,7 @@ export default {
             bbox: [],
             distance: 20,
             message: '',
-           
+            loading: false,
         }
     },
     mounted() {
@@ -33,15 +35,20 @@ export default {
             // if (this.address != '') {
             //     this.filteredApartments();
             // } else {
+            this.loading = true;
+            setTimeout(() => {
                 axios.get(`${this.store.baseUrl}/api/apartments`).then((response) => {
                     if (response.data.success) {
-                    this.apartments = response.data.results;
-
+                        this.apartments = response.data.results;
+                        this.loading = false;
                     }
                     else {
-                    //
+                        //
                     }
+
                 })
+            }, 3000);
+
             // }
         },
         // filteredApartments() {
@@ -75,61 +82,61 @@ export default {
         // },
         getSuggetions() {
             let options = {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: null // non serve un corpo per una richiesta GET
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: null // non serve un corpo per una richiesta GET
             };
 
             fetch("https://api.tomtom.com/search/2/search/" + this.address + ".json?key=" + 'NvRVuGxMpACPuu2WUR93HOEvbVfg2g9A' + "&typeahead=true&limit=10&countrySet=IT", options)
-            .then(response => {
-                // controllare se la risposta è valida
-                if (response.ok) {
-                // convertire la risposta in JSON
-                return response.json();
-                } else {
-                // lanciare un errore se la risposta non è valida
-                throw new Error("Errore nella richiesta: " + response.status);
-                }
-            })
-            .then(data => {
-                // Se l'oggetto JSON contiene dei risultati, popola la lista dei suggerimenti
-                if (data.results.length > 0) {
-                this.suggestions = data.results;
-                console.log(this.suggestions)
-                return data
-                }
-                // Altrimenti, svuota la lista dei suggerimenti e nascondi i dettagli dell'indirizzo
-                else {
-                this.suggestions = "";
-                }
-            })
-            .then((data) => {
-                const inputAddress = this.address.toLowerCase(); // Converto l'indirizzo di input in minuscolo
-                const results = data.results;
+                .then(response => {
+                    // controllare se la risposta è valida
+                    if (response.ok) {
+                        // convertire la risposta in JSON
+                        return response.json();
+                    } else {
+                        // lanciare un errore se la risposta non è valida
+                        throw new Error("Errore nella richiesta: " + response.status);
+                    }
+                })
+                .then(data => {
+                    // Se l'oggetto JSON contiene dei risultati, popola la lista dei suggerimenti
+                    if (data.results.length > 0) {
+                        this.suggestions = data.results;
+                        console.log(this.suggestions)
+                        return data
+                    }
+                    // Altrimenti, svuota la lista dei suggerimenti e nascondi i dettagli dell'indirizzo
+                    else {
+                        this.suggestions = "";
+                    }
+                })
+                .then((data) => {
+                    const inputAddress = this.address.toLowerCase(); // Converto l'indirizzo di input in minuscolo
+                    const results = data.results;
 
-                // Filtra i risultati in base a una corrispondenza parziale
-                const filteredResults = results.filter((result) => {
-                const resultAddress = result.address.freeformAddress.toLowerCase(); // Converto l'indirizzo del risultato in minuscolo
-                return resultAddress.includes(inputAddress); // Verifica se l'indirizzo del risultato include l'indirizzo di input
+                    // Filtra i risultati in base a una corrispondenza parziale
+                    const filteredResults = results.filter((result) => {
+                        const resultAddress = result.address.freeformAddress.toLowerCase(); // Converto l'indirizzo del risultato in minuscolo
+                        return resultAddress.includes(inputAddress); // Verifica se l'indirizzo del risultato include l'indirizzo di input
+                    });
+
+                    if (filteredResults.length > 0) {
+                        this.suggestions = filteredResults;
+                        // Restituisci il risultato più simile tra quelli filtrati
+                        const mostSimilarResult = filteredResults[0];
+                        this.getPosition(mostSimilarResult);
+                    }
+                    // Altrimenti, svuota la lista dei suggerimenti e nascondi i dettagli dell'indirizzo
+                    else {
+                        this.suggestions = "";
+                    }
+                })
+                .catch(error => {
+                    // gestire gli errori
+                    console.log("Errore: " + error.message);
                 });
-
-                if (filteredResults.length > 0) {
-                this.suggestions = filteredResults;
-                // Restituisci il risultato più simile tra quelli filtrati
-                const mostSimilarResult = filteredResults[0];
-                this.getPosition(mostSimilarResult);
-                }
-                // Altrimenti, svuota la lista dei suggerimenti e nascondi i dettagli dell'indirizzo
-                else {
-                this.suggestions = "";
-                }
-            })
-            .catch(error => {
-                // gestire gli errori
-                console.log("Errore: " + error.message);
-            });
         },
         getPosition(data) {
             console.log('sono qui')
@@ -137,10 +144,10 @@ export default {
             this.suggestionLon = data.position.lon;
             // Calcola il bounding box intorno al punto inserito
             this.bbox = [
-            this.suggestionLon - (this.distance / 111.32), // Longitudine minima
-            this.suggestionLat - (this.distance / 111.32),  // Latitudine minima
-            this.suggestionLon + (this.distance / (111.32 * Math.cos(this.suggestionLat * (Math.PI / 180)))), // Longitudine massima
-            this.suggestionLat + (this.distance / 111.32), // Latitudine massima
+                this.suggestionLon - (this.distance / 111.32), // Longitudine minima
+                this.suggestionLat - (this.distance / 111.32),  // Latitudine minima
+                this.suggestionLon + (this.distance / (111.32 * Math.cos(this.suggestionLat * (Math.PI / 180)))), // Longitudine massima
+                this.suggestionLat + (this.distance / 111.32), // Latitudine massima
             ];
         }
     }
@@ -149,7 +156,11 @@ export default {
 </script>
 
 <template lang="">
-    <div class="container-fluid navbar-container">
+        <div v-if='loading'>
+         <AppLoader />        
+       </div>
+       <div v-else>
+        <div class="container-fluid navbar-container">
         <div class="row justify-content-end w-100">
             <div class="col-3 col-lg-2 py-4 ">
             </div>
@@ -266,6 +277,8 @@ export default {
       </div>
 
     </div>
+       </div>
+ 
 </template>
 
 <style lang="scss">
@@ -302,6 +315,4 @@ export default {
         }
     }
 }
-
-
 </style>

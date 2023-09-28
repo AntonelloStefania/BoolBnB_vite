@@ -54,6 +54,7 @@ export default {
                   <ul class="list-unstyled  my-0">
                     <li class="mb-2 fs"><span class="brand">Letti</span>: {{apartment.n_beds}}<i class="fa-solid fa-bed ms-2 align-self-center" style="color: #4f5153;"></i></li>
                     <li class="fs"><span class="brand">Bagni</span>: {{apartment.n_wc}}<i class="fa-solid fa-toilet-paper ms-2" style="color: #4f5153;"></i></li>
+                    <!-- <li>{{apartment.sponsors[0].name}}</li> -->
                   </ul>
                 </div>
               </div>
@@ -88,25 +89,28 @@ height: 780px;
   }
 
 
-  .top-text-wrapper{
-    background: rgb(255,255,255);
-    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(113, 140, 216, 0.288) 100%);
+  .top-text-wrapper {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(113, 140, 216, 0.288) 100%);
   }
+
   .apartment-icons {
     width: 2rem;
     height: 2rem;
   }
 }
-.card:hover{
+
+.card:hover {
   scale: 1.02 !important;
 }
 
 
-.service-container{
-  border:1px solid gray;
+.service-container {
+  border: 1px solid gray;
   border-radius: 0.755rem;
 }
-.fs-m{
+
+.fs-m {
   font-size: 17px;
 }
 .type-icon {
