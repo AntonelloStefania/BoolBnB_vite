@@ -125,27 +125,27 @@ export default {
 
       const urladdress = `http://127.0.0.1:8000/api/all-filtered-apartments`
       axios.get(urladdress, { params })
-        .then(resp => {
-          this.success = resp.data.success
-          if (this.success) {
-            this.message = '';
-            if (resp.data.results) {
-              this.apartments = resp.data.results;
-            }
-            else if (resp.data.message) {
-              this.message = resp.data.message;
-              this.apartments = '';
-            }
-          } else {
-            this.errors = resp.data.errors;
+      .then(resp => {
+        this.success = resp.data.success
+        if (this.success) {
+          this.message = '';
+          if (resp.data.results) {
+            this.apartments = resp.data.results;
           }
-        })
-        .catch(error => {
-          console.error(error);
-        })
-        .finally(() => {
-          this.bbox = '';
-        })
+          else if (resp.data.message) {
+            this.message = resp.data.message;
+            this.apartments = '';
+          }
+        } else {
+          this.errors = resp.data.errors;
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(() => {
+        this.bbox = '';
+      })
     },
 
 
