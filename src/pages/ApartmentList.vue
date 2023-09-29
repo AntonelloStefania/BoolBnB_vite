@@ -27,6 +27,8 @@ export default {
       message: '',
       checkboxServices: [],
       services: [],
+      errors: [],
+      boolError: false,
     }
   },
   created() {
@@ -41,6 +43,8 @@ export default {
     getApartments() {
       this.message= '';
       this.$router.push({query: {}});
+      this.errors = [];
+      this.boolError = false;
       if(this.address === ''){
         this.suggestionLat = '';
         this.suggestionLon = '';
@@ -136,18 +140,34 @@ export default {
         query = Object.assign(query, { 'distance': this.distance });
       }
       if(this.wc !== ''){
+        if(this.wc < 0 || this.wc > 50){
+          this.errors.push('Valore per i bagni non valido');
+          this.boolError= true; 
+        }
         params.wc = this.wc;
         query = Object.assign(query, { 'wc': this.wc });
       };
       if(this.rooms !== ''){
+        if(this.rooms < 0 || this.rooms > 100){
+          this.errors.push('Valore per le stanze non valido');
+          this.boolError= true; 
+        }
         params.rooms = this.rooms;
         query = Object.assign(query, { 'rooms': this.rooms });
       };
       if(this.mq !== ''){
+        if(this.mq < 0 || this.mq > 701){
+          this.errors.push('Valore per i metri quadri non valido');
+          this.boolError= true; 
+        }
         params.mq = this.mq;
         query = Object.assign(query, { 'mq': this.mq });
       };
       if(this.beds !== ''){
+        if(this.beds < 0 || this.beds > 500){
+          this.errors.push('Valore per i posti letto non valido');
+          this.boolError= true; 
+        }
         params.beds = this.beds;
         query = Object.assign(query, { 'beds': this.beds });
       };
@@ -156,6 +176,9 @@ export default {
         query = Object.assign(query, { 'services': this.checkboxServices });
       };
       this.$router.push({query: query});
+      if(this.boolError){
+        return this.message = 'Campi di ricerca non validi'
+      }
 
       const urladdress = `http://127.0.0.1:8000/api/all-filtered-apartments`
       axios.get(urladdress, { params })
@@ -290,6 +313,13 @@ export default {
               <p>
                 Trova l'opzione perfetta per te! Utilizza i <span class="brand">Filtri di Ricerca</span> qui sotto per adattare la tua ricerca alle tue esigenze. <span class="brand">Scegli</span> tra una vasta gamma di opzioni e trova ciò che stai cercando in modo rapido e semplice.
               </p>
+          </div>
+          <div class="col-12 alert alert-danger" v-if="this.boolError">
+            <ul>
+              <li class="text-danger list-unstyled" v-for="error in this.errors">
+                {{error}}
+              </li>
+            </ul>
           </div>
           <div class="col-12 text-center d-flex flex-column flex-lg-row">
             <div class=" col-12 col-lg-8 pt-4">
