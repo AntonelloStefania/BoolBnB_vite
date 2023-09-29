@@ -31,12 +31,12 @@ export default {
             </div>
             <div class="top-text-wrapper py-3">
               <div class="px-4">
-                <h5 class="mb-1 title">{{apartment.title}}</h5>
-                <div class="mb-1">
-                  <span class="brand">Indirizzo</span>: {{apartment.address}}
+                <h5 class="mb-1 title text-center">{{apartment.title}}</h5>
+                <div class="my-2">
+                  <i class="fa-solid brand fa-location-dot me-1" style="color: #718dd8;"></i> <span class="brand d-none d-lg-inline">Indirizzo</span>: {{apartment.address}}
                 </div>
-                <div v-if='address != ""'>
-                  <span class="brand">Distanza</span>: {{getDistance(apartment.lat, apartment.lon)}} Km
+                <div v-if='address != ""' class="mb-2 text-center">
+                  <i class="fa-solid fa-route" style="color: #718dd8;"></i> <span class="brand d-none d-lg-inline">Distanza</span>: {{getDistance(apartment.lat, apartment.lon)}} Km
                 </div>
                 <div class="col-12 d-flex  align-items-center">
                   <div class="col-6 text-center">
@@ -66,7 +66,7 @@ export default {
                   </ul>
                 </div>
               </div>
-              <h6 class="mt-3"><span class="brand">Servizi</span>:</h6>
+              <h6 class="mt-3 text-center"><span class="brand">Servizi</span>:</h6>
               <div class="col-12 d-flex flex-wrap ">
                 <div class="col-auto text-center my-2" style="width:3rem" v-for="service in apartment.services">
                  
@@ -84,10 +84,10 @@ export default {
 
 <style lang="scss">
 .card-h {
- 
-height: 780px;
+  height: 853px;
+
   .title {
-    height: 58px;
+    height: 45px;
     overflow: hidden;
   }
 
