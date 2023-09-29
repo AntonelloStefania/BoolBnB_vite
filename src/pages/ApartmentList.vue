@@ -63,6 +63,23 @@ export default {
       }
     },
 
+    resetInput(){
+      this.address = '';
+      this.distance = 20;
+      this.mq = '';
+      this.wc = '';
+      this.rooms = '';
+      this.beds = '';
+      this.checkboxServices = '';
+      let labels = document.getElementsByClassName('form-check-label');
+      for(let i=0; i<labels.length; i++){
+        let label = labels[i];
+        label.classList.remove('checkbox-bg');
+      }
+      this.$router.push({query: {}});
+      this.getApartments();
+    },
+
     getServices(){
       axios.get(this.store.baseUrl + '/api/services').then((response) => {
         if(response.data.success){
@@ -356,8 +373,13 @@ export default {
           <!-- <input type="number" v-model="n_wc_min"> -->
         </div>
         <div class="col-12 text-center">
-          <button class="blue-btn btn" @click="getApartments()">
-            Avvia ricerca
+          <a href="#list">
+            <button class="blue-btn btn me-4" @click="getApartments()">
+              Avvia ricerca
+            </button>
+          </a>
+          <button class="btn beige-btn" @click="resetInput()">
+            Svuota ricerca
           </button>
           <div v-if="this.message" class="col-12 text-center my-5 p-5 bg-beige">
             <h5 class="home-text fw-bold">{{this.message}}</h5>
@@ -367,9 +389,9 @@ export default {
   </div>
   
   <div v-if="!this.message" class="container-fluid bg-beige py-5 mt-5 ">
-    <div class="container">
+    <div class="container" id="list">
       <div class="row cards-row ">
-        <div class="col-12 col-md-6 col-lg-4 my-4 card-container" v-for="apartment in apartments" :key="apartment.id">
+        <div class="col-12 col-md-6 col-lg-4 my-4 card-container"  v-for="apartment in apartments" :key="apartment.id">
           <Card :apartment='apartment' :getDistance='getDistance' :address='this.address'/>
         </div>
       </div>
