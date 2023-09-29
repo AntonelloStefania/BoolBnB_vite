@@ -31,10 +31,13 @@ export default {
             </div>
             <div class="top-text-wrapper py-3">
               <div class="px-4">
-                <h5 class="mb-2 title">{{apartment.title}}</h5>
-                <p v-if='address != ""'>
+                <h5 class="mb-1 title">{{apartment.title}}</h5>
+                <div class="mb-1">
+                  <span class="brand">Indirizzo</span>: {{apartment.address}}
+                </div>
+                <div v-if='address != ""'>
                   <span class="brand">Distanza</span>: {{getDistance(apartment.lat, apartment.lon)}} Km
-                </p>
+                </div>
                 <div class="col-12 d-flex  align-items-center">
                   <div class="col-6 text-center">
                     <div><img :src="apartment.type.icons" alt="" class="apartment-icons me-3"></div>
