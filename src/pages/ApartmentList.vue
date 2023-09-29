@@ -74,6 +74,23 @@ export default {
       })
     },
 
+    getDistance(lat1, lon1){
+      var R = 6371; // Radius of the earth in km
+      var dLat = this.deg2rad(this.suggestionLat - lat1);  // deg2rad below
+      var dLon = this.deg2rad(this.suggestionLon - lon1); 
+      var a = 
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(this.suggestionLat)) * 
+        Math.sin(dLon/2) * Math.sin(dLon/2)
+        ; 
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+      var d = (R * c).toFixed(2); // Distance in km
+      return d;
+    },
+
+    deg2rad(deg) {
+      return deg * (Math.PI/180);
+    },
 
     filteredApartments() {
       
@@ -147,16 +164,7 @@ export default {
         this.bbox = '';
       })
     },
-
-
-    // {
-    //   // this.apartments = this.apartments.filter(apartment => apartment.n_wc > this.n_wc_min);
-    //   this.apartments = this.apartments.filter(apartment => apartment.lon > this.bbox[0]);
-    //   this.apartments = this.apartments.filter(apartment => apartment.lon < this.bbox[2]);
-    //   this.apartments = this.apartments.filter(apartment => apartment.lat > this.bbox[1]);
-    //   this.apartments = this.apartments.filter(apartment => apartment.lat < this.bbox[3]);
-    //   this.address = '';
-    // },
+    // FUNZIONE PER LA RICERCA DEI SUGGERIMENTI
     getSuggetions() {
       let options = {
         method: "GET",
@@ -362,7 +370,7 @@ export default {
     <div class="container">
       <div class="row cards-row ">
         <div class="col-12 col-md-6 col-lg-4 my-4 card-container" v-for="apartment in apartments" :key="apartment.id">
-            <Card :apartment="apartment" />
+          <Card :apartment='apartment' :getDistance='getDistance' :address='this.address'/>
         </div>
       </div>
     </div>
