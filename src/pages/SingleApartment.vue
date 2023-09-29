@@ -198,7 +198,7 @@ export default {
     <div class="row justify-content-between w-100">
         <div class="d-flex col-6 justify-content-center">
             <div class="col-6 py-3 d-flex justify-content-center">
-                <router-link :to="{ name: 'home' }" class=" d-flex align-items-center " style="text-decoration: none; color: #3a537e;">
+                <router-link :to="{ name: 'home' }" class=" d-flex align-items-center fw-bold" style="text-decoration: none; color: #3a537e;">
                     <div class="col-auto">
                         <i class="fa-regular fa-circle-left me-2" style="color: #3a537e;"></i>
                     </div>
@@ -209,7 +209,7 @@ export default {
             </div>
         </div>
         <div class="d-flex col-6 justify-content-center">
-            <a href="#bottom" style="text-decoration: none; color: #3a537e;" class=" d-flex align-items-center ">
+            <a href="#bottom" style="text-decoration: none; color: #3a537e;" class=" d-flex align-items-center fw-bold ">
                 <div class="col-auto">
                     <span>Contatta l'Host</span>
                 </div>
