@@ -32,12 +32,13 @@ export default {
             <div class="top-text-wrapper py-3">
               <div class="px-4">
                 <h5 class="mb-1 title text-center">{{apartment.title}}</h5>
-                <div class="my-2">
-                  <i class="fa-solid brand fa-location-dot me-1" style="color: #718dd8;"></i> <span class="brand d-none d-lg-inline">Indirizzo</span>: {{apartment.address}}
+                <div class="my-2 text-center text-md-start">
+                  <i class="fa-solid brand fa-location-dot me-1" style="color: #718dd8;"></i> <span class="brand d-none d-lg-inline">Indirizzo:</span> {{apartment.address}}
                 </div>
                 <div v-if='address != ""' class="mb-2 text-center">
-                  <i class="fa-solid fa-route" style="color: #718dd8;"></i> <span class="brand d-none d-lg-inline">Distanza</span>: {{getDistance(apartment.lat, apartment.lon)}} Km
+                  <i class="fa-solid fa-route" style="color: #718dd8;"></i> <span class="brand ">Distanza</span>: {{getDistance(apartment.lat, apartment.lon)}} Km
                 </div>
+                <div v-else style="height:25px"></div>
                 <div class="col-12 d-flex  align-items-center">
                   <div class="col-6 text-center">
                     <div><img :src="apartment.type.icons" alt="" class="apartment-icons me-3"></div>

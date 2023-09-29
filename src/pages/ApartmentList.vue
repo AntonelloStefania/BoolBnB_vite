@@ -421,7 +421,7 @@ export default {
   <div v-if="!this.message" class="container-fluid bg-beige py-5 mt-5 ">
     <div class="container" id="list">
       <div class="row cards-row ">
-        <div class="col-12 col-md-6 col-lg-4 my-4 card-container"  v-for="apartment in apartments" :key="apartment.id">
+        <div class="col-12 col-md-6 col-xl-4 my-4 card-container"  v-for="apartment in apartments" :key="apartment.id">
           <router-link class="text-decoration-none card-container" :to=" { name: 'single-apartment', params: { slug: apartment.slug }}">
               <Card :apartment="apartment" :getDistance="getDistance" :address="this.address"/>
           </router-link>
