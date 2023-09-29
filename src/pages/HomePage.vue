@@ -51,6 +51,9 @@ export default {
 
             // }
         },
+        getDistance(){
+            return 'Ciao Kekkha'
+        },
         // filteredApartments() {
 
         //     const params = {
@@ -252,7 +255,7 @@ export default {
            <div class="row">
                <div class="col-12 col-md-6 col-lg-4 my-4" v-for="apartment in apartments" :key="apartment.id">
                 <router-link class="text-decoration-none card-container" :to=" { name: 'single-apartment', params: { slug: apartment.slug }}">
-                    <Card :apartment="apartment" />
+                    <Card :apartment="apartment" :getDistance="getDistance" :address="address"/>
                 </router-link>
                </div>
            </div>

@@ -3,8 +3,10 @@ import { store } from '../store.js'
 
 export default {
   name: 'Card',
-  props: {
-    apartment: Object
+  props:{
+    apartment: Object,
+    getDistance: Function, 
+    address: String,
   },
   data() {
     return {
@@ -30,6 +32,9 @@ export default {
             <div class="top-text-wrapper py-3">
               <div class="px-4">
                 <h5 class="mb-2 title">{{apartment.title}}</h5>
+                <p v-if='address != ""'>
+                  <span class="brand">Distanza</span>: {{getDistance(apartment.lat, apartment.lon)}} Km
+                </p>
                 <div class="col-12 d-flex  align-items-center">
                   <div class="col-6 text-center">
                     <div><img :src="apartment.type.icons" alt="" class="apartment-icons me-3"></div>
@@ -58,7 +63,7 @@ export default {
                   </ul>
                 </div>
               </div>
-              <h6 class="mt-3">Servizi <span class="brand">Extra</span>:</h6>
+              <h6 class="mt-3"><span class="brand">Servizi</span>:</h6>
               <div class="col-12 d-flex flex-wrap ">
                 <div class="col-auto text-center my-2" style="width:3rem" v-for="service in apartment.services">
                  
