@@ -131,9 +131,7 @@ h1{
 }
 
 /* -----------------footer html-----------------*/
-#footer-large{
-    margin-top: 20px;
-}
+
 
 #footer-large a{
 	color:white; /* seconday color*/
