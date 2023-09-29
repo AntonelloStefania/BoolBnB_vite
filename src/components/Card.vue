@@ -63,7 +63,7 @@ export default {
                   </ul>
                 </div>
               </div>
-              <h6 class="mt-3">Servizi <span class="brand">Extra</span>:</h6>
+              <h6 class="mt-3"><span class="brand">Servizi</span>:</h6>
               <div class="col-12 d-flex flex-wrap ">
                 <div class="col-auto text-center my-2" style="width:3rem" v-for="service in apartment.services">
                  
