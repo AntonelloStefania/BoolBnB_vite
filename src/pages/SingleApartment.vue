@@ -316,7 +316,7 @@ export default {
         <p>Hai domande sull'annuncio o hai bisogno di informazioni aggiuntive dall'host? Utilizza il modulo di contatto qui sotto per metterti in contatto direttamente con l'host. Fai la tua prenotazione in modo sicuro e senza stress su <span class="brand">BoolBnB!</span></p>
     </div>
     <div class="row">
-        <div class="col-12 col-md-8 offset-md-2 pe-lg-0 card d-flex flex-row justify-content-between">
+        <div class="col-12 mb-5 col-md-8 offset-md-2 pe-lg-0 card d-flex flex-row justify-content-between">
             <div class="col-10 py-4 offset-1 offset-xl-0 col-xl-6">
                 <form @submit.prevent="sendForm()">
                     <div>
@@ -352,7 +352,7 @@ export default {
                     </div>
                 </form>
             </div>
-            <div class="col-5 card-image d-none d-lg-block">
+            <div class="col-5 card-image d-none d-lg-block" style="object-fit:cover">
                 <img src="../assets/apartments/contact-2.jpg" class="img-fluid h-100 contact-img" alt="">
             </div>
         </div>
