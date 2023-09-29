@@ -2,12 +2,14 @@
 import axios from 'axios';
 import { store } from '../store.js';
 import Card from '../components/Card.vue';
+import AppLoader from '../components/AppLoader.vue';
 
 
 export default {
   name: 'ApartmentList',
   components: {
     Card,
+    AppLoader,
 
   },
   data() {
@@ -27,6 +29,7 @@ export default {
       message: '',
       checkboxServices: [],
       services: [],
+      loading: false,
     }
   },
   created() {
@@ -34,14 +37,14 @@ export default {
   mounted() {
     this.getApartments();
     this.getServices();
-    
-    
+
+
   },
   methods: {
     getApartments() {
-      this.message= '';
-      this.$router.push({query: {}});
-      if(this.address === ''){
+      this.message = '';
+      this.$router.push({ query: {} });
+      if (this.address === '') {
         this.suggestionLat = '';
         this.suggestionLon = '';
         this.bbox = [];
@@ -49,12 +52,13 @@ export default {
       if (this.address !== '' || this.wc != '' || this.rooms != '' || this.mq != '' || this.beds != '' || this.checkboxServices != '') {
         this.filteredApartments();
         this.$route.query.homeAddress = '';
-      } else{
+      } else {
+        this.loading = true;
         axios.get(`${this.store.baseUrl}/api/all-apartments`).then((response) => {
           if (response.data.success) {
             this.apartments = response.data.results;
-            
-  
+            this.loading = false;
+
           }
           else {
             //
@@ -63,7 +67,7 @@ export default {
       }
     },
 
-    resetInput(){
+    resetInput() {
       this.address = '';
       this.distance = 20;
       this.mq = '';
@@ -72,17 +76,17 @@ export default {
       this.beds = '';
       this.checkboxServices = '';
       let labels = document.getElementsByClassName('form-check-label');
-      for(let i=0; i<labels.length; i++){
+      for (let i = 0; i < labels.length; i++) {
         let label = labels[i];
         label.classList.remove('checkbox-bg');
       }
-      this.$router.push({query: {}});
+      this.$router.push({ query: {} });
       this.getApartments();
     },
 
-    getServices(){
+    getServices() {
       axios.get(this.store.baseUrl + '/api/services').then((response) => {
-        if(response.data.success){
+        if (response.data.success) {
           this.services = response.data.results;
           console.log(this.services);
         } else {
@@ -91,34 +95,34 @@ export default {
       })
     },
 
-    getDistance(lat1, lon1){
+    getDistance(lat1, lon1) {
       var R = 6371; // Radius of the earth in km
       var dLat = this.deg2rad(this.suggestionLat - lat1);  // deg2rad below
-      var dLon = this.deg2rad(this.suggestionLon - lon1); 
-      var a = 
-        Math.sin(dLat/2) * Math.sin(dLat/2) +
-        Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(this.suggestionLat)) * 
-        Math.sin(dLon/2) * Math.sin(dLon/2)
-        ; 
-      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+      var dLon = this.deg2rad(this.suggestionLon - lon1);
+      var a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(this.suggestionLat)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2)
+        ;
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
       var d = (R * c).toFixed(2); // Distance in km
       return d;
     },
 
     deg2rad(deg) {
-      return deg * (Math.PI/180);
+      return deg * (Math.PI / 180);
     },
 
     filteredApartments() {
-      
+
       if (this.suggestionLat !== '' && !isNaN(this.suggestionLat) && this.suggestionLon !== '' && !isNaN(this.suggestionLon)) {
-          // Calcola il bounding box intorno al punto inserito
-          this.bbox = [
-            this.suggestionLon - (this.distance / 111.32), // Longitudine minima
-            this.suggestionLat - (this.distance / 111.32),  // Latitudine minima
-            this.suggestionLon + (this.distance / (111.32 * Math.cos(this.suggestionLat * (Math.PI / 180)))), // Longitudine massima
-            this.suggestionLat + (this.distance / 111.32), // Latitudine massima
-          ];
+        // Calcola il bounding box intorno al punto inserito
+        this.bbox = [
+          this.suggestionLon - (this.distance / 111.32), // Longitudine minima
+          this.suggestionLat - (this.distance / 111.32),  // Latitudine minima
+          this.suggestionLon + (this.distance / (111.32 * Math.cos(this.suggestionLat * (Math.PI / 180)))), // Longitudine massima
+          this.suggestionLat + (this.distance / 111.32), // Latitudine massima
+        ];
       }
 
       const params = {};
@@ -131,55 +135,55 @@ export default {
         params.max_lat = this.bbox[3];
         params.max_lon = this.bbox[2];
       };
-      if(this.address !== ''){
+      if (this.address !== '') {
         query = Object.assign(query, { 'address': this.address });
         query = Object.assign(query, { 'distance': this.distance });
       }
-      if(this.wc !== ''){
+      if (this.wc !== '') {
         params.wc = this.wc;
         query = Object.assign(query, { 'wc': this.wc });
       };
-      if(this.rooms !== ''){
+      if (this.rooms !== '') {
         params.rooms = this.rooms;
         query = Object.assign(query, { 'rooms': this.rooms });
       };
-      if(this.mq !== ''){
+      if (this.mq !== '') {
         params.mq = this.mq;
         query = Object.assign(query, { 'mq': this.mq });
       };
-      if(this.beds !== ''){
+      if (this.beds !== '') {
         params.beds = this.beds;
         query = Object.assign(query, { 'beds': this.beds });
       };
-      if(this.checkboxServices !== ''){
+      if (this.checkboxServices !== '') {
         params.services = this.checkboxServices;
         query = Object.assign(query, { 'services': this.checkboxServices });
       };
-      this.$router.push({query: query});
+      this.$router.push({ query: query });
 
       const urladdress = `http://127.0.0.1:8000/api/all-filtered-apartments`
       axios.get(urladdress, { params })
-      .then(resp => {
-        this.success = resp.data.success
-        if (this.success) {
-          this.message = '';
-          if (resp.data.results) {
-            this.apartments = resp.data.results;
+        .then(resp => {
+          this.success = resp.data.success
+          if (this.success) {
+            this.message = '';
+            if (resp.data.results) {
+              this.apartments = resp.data.results;
+            }
+            else if (resp.data.message) {
+              this.message = resp.data.message;
+              this.apartments = '';
+            }
+          } else {
+            this.errors = resp.data.errors;
           }
-          else if (resp.data.message) {
-            this.message = resp.data.message;
-            this.apartments = '';
-          }
-        } else {
-          this.errors = resp.data.errors;
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      })
-      .finally(() => {
-        this.bbox = '';
-      })
+        })
+        .catch(error => {
+          console.error(error);
+        })
+        .finally(() => {
+          this.bbox = '';
+        })
     },
     // FUNZIONE PER LA RICERCA DEI SUGGERIMENTI
     getSuggetions() {
@@ -245,11 +249,11 @@ export default {
       this.suggestionLat = data.position.lat;
       this.suggestionLon = data.position.lon;
     },
-    getService(serviceId, index){
+    getService(serviceId, index) {
       console.log(serviceId)
       let label = document.getElementById(index);
       console.log(label)
-      if(label.classList.contains('checkbox-bg')){
+      if (label.classList.contains('checkbox-bg')) {
         label.classList.remove('checkbox-bg')
         let indexOfService = this.checkboxServices.indexOf(serviceId)
         this.checkboxServices.splice(indexOfService, 1)
@@ -264,7 +268,12 @@ export default {
 </script>
 
 <template lang="">
-  <div class="container-fluid navbar-container">
+  <div v-if="loading">
+ <AppLoader/>
+  </div>
+
+  <div v-else>
+    <div class="container-fluid navbar-container">
       <div class="row  w-100">
           <div class="d-flex col-6 justify-content-center">
             
@@ -397,14 +406,17 @@ export default {
       </div>
     </div>
   </div>
+  </div>
+
    
 </template>
 
 <style lang="scss">
 .card-container {
-    
-    cursor: pointer;
+
+  cursor: pointer;
 }
+
 .checkbox-bg {
   background-color: #C0C9E1;
   border-radius: 0.5rem;
