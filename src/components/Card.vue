@@ -3,7 +3,7 @@ import { store } from '../store.js'
 
 export default {
   name: 'Card',
-  props: {
+  props:{
     apartment: Object,
     getDistance: Function, 
     address: String,
