@@ -253,7 +253,7 @@ export default {
    <div class="container-fluid bg-beige">
        <div class="container">
            <div class="row">
-               <div class="col-12 col-md-6 col-xl-4 my-4" v-for="apartment in apartments" :key="apartment.id">
+               <div class="col-12 col-md-6 col-xl-4 my-5" v-for="apartment in apartments" :key="apartment.id">
                 <router-link class="text-decoration-none card-container" :to=" { name: 'single-apartment', params: { slug: apartment.slug }}">
                     <Card :apartment="apartment" :getDistance="getDistance" :address="address"/>
                 </router-link>
@@ -263,11 +263,11 @@ export default {
    </div>
    <div class="container">
       <div class="row">
-        <div class="col-12 text-center mt-4">
+        <div class="col-12 text-center mt-5">
             <h2><span class="brand">Esplora</span> le Meraviglie di <span class="brand">BoolBnB</span> sulla Mappa</h2>
         </div>
         <div class="col-12 d-flex flex-column flex-lg-row  my-5">
-            <div class="col-12 col-lg-6 d-flex align-items-center pe-5 text-center">
+            <div class="col-12 col-lg-6 d-flex align-items-center pe-5 ">
                 <p>
                     Dai un'occhiata alle straordinarie proprietà disponibili su <span class="brand">BoolBnB</span> sulla nostra mappa interattiva. <span class="brand">BoolBnB</span>  ti offre una vasta gamma di alloggi eccezionali, perfetti per rendere il tuo soggiorno indimenticabile. Sia che tu stia cercando un'accogliente casa vacanze, un lussuoso appartamento o una romantica baita di montagna, puoi trovarli tutti qui. Esplora la mappa, scopri le posizioni esatte e prenota il tuo alloggio dei sogni su <span class="brand">BoolBnB</span>  oggi stesso!
                 </p>
