@@ -110,9 +110,13 @@ export default {
 }
 
 .card:hover {
-  scale: 1.02 !important;
+ transform: scale(1.02) !important;
+  transition: transform 0.5s ease !important;
 }
-
+.card {
+  transform: scale(1);
+  transition: transform 0.5s ease !important;
+}
 
 .service-container {
   border: 1px solid gray;
