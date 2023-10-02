@@ -8,10 +8,7 @@ export default {
                     label: 'Home',
                     routeName: 'home'
                 },
-                {
-                    label: 'Apartments',
-                    routeName: 'apartments'
-                }
+              
             ]
         }
     }

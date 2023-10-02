@@ -221,7 +221,7 @@ export default {
     </div>
 </div>
 
-<div class="container-fluid">
+<!-- <div class="container-fluid">
     <div class="row">
         <div class="col-8 offset-2 text-center mb-5">
             <h2 class="my-3"><span class="brand">Dettagli</span></h2>
@@ -230,7 +230,7 @@ export default {
             </p>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="container-fluid bg-beige py-3">
     <div class="container">

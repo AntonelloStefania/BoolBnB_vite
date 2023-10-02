@@ -52,7 +52,7 @@ export default {
             // }
         },
         getDistance(){
-            return 'Ciao Kekkha'
+            return '0'
         },
         // filteredApartments() {
 
